@@ -33,6 +33,7 @@ def driver_config():
     options.add_argument("--no-first-run")
     options.add_argument("--no-proxy-server")
     options.add_argument("--disable-blink-feature=AutomationControlled")
+    options.add_argument("--window-size=1920,1032")
     options.add_experimental_option("excludeSwitches", exp_opt)
     options.add_experimental_option("prefs", prefs)
     s = Service(driver_path)

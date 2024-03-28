@@ -1,6 +1,5 @@
 import json
 
-
 class Caracteristica:
 
     def __init__(self, nombre, valor):

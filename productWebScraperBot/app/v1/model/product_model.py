@@ -3,8 +3,8 @@ import json
 
 class Producto:
 
-    def __init__(self, id = '', nombre='', url='', marca='', precio='', categoria='', plataforma='',
-                 caracteristicas=None, comentarios=None):
+    def __init__(self, id = '', nombre='', url='', marca='', precio='', categoria='', plataforma='', imagen_url='',
+                 caracteristicas=None, comentarios=None, created_or_updated_at = ''):
         self._id = id
         self._nombre = nombre
         self._url = url
@@ -12,8 +12,10 @@ class Producto:
         self._precio = precio
         self._categoria = categoria
         self._plataforma = plataforma
+        self._imagen_url = imagen_url
         self._caracteristicas = caracteristicas if caracteristicas is not None else []
         self._comentarios = comentarios if comentarios is not None else []
+        self._created_or_updated_at = created_or_updated_at
 
     @property
     def id(self):
@@ -44,12 +46,20 @@ class Producto:
         return self.plataforma
 
     @property
+    def imagen_url(self):
+        return self.imagen_url
+
+    @property
     def caracteristicas(self):
         return self.caracteristicas
 
     @property
     def comentarios(self):
         return self.comentarios
+
+    @property
+    def created_or_updated_at(self):
+        return self.created_or_updated_at
 
     @id.setter
     def id(self, value):
@@ -79,6 +89,10 @@ class Producto:
     def plataforma(self, value):
         self._plataforma = value
 
+    @imagen_url.setter
+    def imagen_url(self, value):
+        self._imagen_url = value
+
     @caracteristicas.setter
     def caracteristicas(self, value):
         self._caracteristicas = value
@@ -86,6 +100,10 @@ class Producto:
     @comentarios.setter
     def comentarios(self, value):
         self._comentarios = value
+
+    @created_or_updated_at.setter
+    def created_or_updated_at(self, value):
+        self._created_or_updated_at = value
 
     def to_dict(self):
         return {
@@ -96,8 +114,10 @@ class Producto:
             'precio': self._precio,
             'categoria': self._categoria,
             'plataforma': self._plataforma,
+            'imagen_url': self._imagen_url,
             'caracteristicas': [caracteristica.to_dict() for caracteristica in self._caracteristicas],
-            'comentarios': [comentario.to_dict() for comentario in self._comentarios]
+            'comentarios': [comentario.to_dict() for comentario in self._comentarios],
+            'createdOrUpdatedAt': self._created_or_updated_at
         }
 
     def to_json(self):
