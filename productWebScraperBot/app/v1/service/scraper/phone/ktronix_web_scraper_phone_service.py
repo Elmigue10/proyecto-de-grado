@@ -91,7 +91,7 @@ def ktronix_web_scraper_bot(driver):
                     phone_characteristics.append(Caracteristica("Memoria RAM", memoria_ram_value))
                     producto_id += memoria_ram_value
 
-                elif characteristics_features[i].text.__contains__("Sistema Operativo"):
+                elif characteristics_features[i].text.strip == "Sistema Operativo":
                     phone_characteristics.append(Caracteristica("Sistema Operativo",
                                                                 characteristics_results[i].text.strip()))
 

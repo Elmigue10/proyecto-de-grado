@@ -68,7 +68,7 @@ def falabella_web_scraper_bot(driver):
                         (phone_characteristics
                          .append(Caracteristica("Memoria RAM", properties_values[i].text.strip())))
 
-                    elif properties_names[i].text == "Sistema operativo":
+                    elif properties_names[i].text.strip() == "Sistema operativo":
                         (phone_characteristics
                          .append(Caracteristica("Sistema operativo", properties_values[i].text.strip())))
 
