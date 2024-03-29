@@ -151,12 +151,12 @@ def ktronix_web_scraper_bot(driver):
                 comment_text = ""
 
                 try:
-                    comment_text += comment_titles[i].text.strip()
+                    comment_text += comment_titles[i].text.strip() + ". "
                 except IndexError:
                     print("IndexError captured...")
 
                 try:
-                    comment_text += ". " + comment_texts[i].text.strip()
+                    comment_text += comment_texts[i].text.strip()
                 except IndexError:
                     print("IndexError captured...")
 

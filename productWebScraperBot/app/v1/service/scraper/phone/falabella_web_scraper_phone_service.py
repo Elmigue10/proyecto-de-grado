@@ -55,64 +55,64 @@ def falabella_web_scraper_bot(driver):
             if properties_button:
                 properties_button[0].click()
 
-            properties_names = driver.find_elements(By.CSS_SELECTOR,
-                                                    "td.property-name")
+                properties_names = driver.find_elements(By.CSS_SELECTOR,
+                                                        "td.property-name")
 
-            properties_values = driver.find_elements(By.CSS_SELECTOR,
-                                                     "td.property-value")
+                properties_values = driver.find_elements(By.CSS_SELECTOR,
+                                                         "td.property-value")
 
-            phone_characteristics = []
+                phone_characteristics = []
 
-            for i in range(len(properties_names)):
-                if properties_names[i].text.__contains__("Memoria RAM"):
-                    (phone_characteristics
-                     .append(Caracteristica("Memoria RAM", properties_values[i].text.strip())))
+                for i in range(len(properties_names)):
+                    if properties_names[i].text.__contains__("Memoria RAM"):
+                        (phone_characteristics
+                         .append(Caracteristica("Memoria RAM", properties_values[i].text.strip())))
 
-                elif properties_names[i].text == "Sistema operativo":
-                    (phone_characteristics
-                     .append(Caracteristica("Sistema operativo", properties_values[i].text.strip())))
+                    elif properties_names[i].text == "Sistema operativo":
+                        (phone_characteristics
+                         .append(Caracteristica("Sistema operativo", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Núcleos del procesador"):
-                    (phone_characteristics
-                     .append(Caracteristica("Núcleos del procesador", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Núcleos del procesador"):
+                        (phone_characteristics
+                         .append(Caracteristica("Núcleos del procesador", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Tamaño de la pantalla"):
-                    (phone_characteristics
-                     .append(Caracteristica("Tamaño de la pantalla", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Tamaño de la pantalla"):
+                        (phone_characteristics
+                         .append(Caracteristica("Tamaño de la pantalla", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Cámara posterior"):
-                    (phone_characteristics
-                     .append(Caracteristica("Cámara posterior", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Cámara posterior"):
+                        (phone_characteristics
+                         .append(Caracteristica("Cámara posterior", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Modelo"):
-                    (phone_characteristics
-                     .append(Caracteristica("Modelo", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Modelo"):
+                        (phone_characteristics
+                         .append(Caracteristica("Modelo", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Cámara frontal"):
-                    (phone_characteristics
-                     .append(Caracteristica("Cámara frontal", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Cámara frontal"):
+                        (phone_characteristics
+                         .append(Caracteristica("Cámara frontal", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Conectividad"):
-                    (phone_characteristics
-                     .append(Caracteristica("Conectividad", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Conectividad"):
+                        (phone_characteristics
+                         .append(Caracteristica("Conectividad", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Capacidad de la batería"):
-                    (phone_characteristics
-                     .append(Caracteristica("Capacidad de la batería (mAh)", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Capacidad de la batería"):
+                        (phone_characteristics
+                         .append(Caracteristica("Capacidad de la batería (mAh)", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Sistema operativo específico"):
-                    (phone_characteristics
-                     .append(Caracteristica("Sistema operativo específico", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Sistema operativo específico"):
+                        (phone_characteristics
+                         .append(Caracteristica("Sistema operativo específico", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Capacidad de almacenamiento"):
-                    (phone_characteristics
-                     .append(Caracteristica("Capacidad de almacenamiento", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Capacidad de almacenamiento"):
+                        (phone_characteristics
+                         .append(Caracteristica("Capacidad de almacenamiento", properties_values[i].text.strip())))
 
-                elif properties_names[i].text.__contains__("Marca y modelo del procesador"):
-                    (phone_characteristics
-                     .append(Caracteristica("Marca y modelo del procesador", properties_values[i].text.strip())))
+                    elif properties_names[i].text.__contains__("Marca y modelo del procesador"):
+                        (phone_characteristics
+                         .append(Caracteristica("Marca y modelo del procesador", properties_values[i].text.strip())))
 
-            producto.caracteristicas = phone_characteristics
+                producto.caracteristicas = phone_characteristics
 
             comments_button = driver.find_elements(By.CSS_SELECTOR, "button.bv-content-btn.bv-content-btn-pages"
                                                                    ".bv-content-btn-pages-load-more.bv-focusable")
@@ -120,24 +120,25 @@ def falabella_web_scraper_bot(driver):
             if comments_button:
                 comments_button[0].click()
 
-            username_comments_container = driver.find_elements(By.CSS_SELECTOR, "div.bv-author")
-            comment_texts = driver.find_elements(By.CSS_SELECTOR, "div.bv-content-summary-body-text")
+                username_comments_container = driver.find_elements(By.CSS_SELECTOR, "div.bv-author")
+                comment_texts = driver.find_elements(By.CSS_SELECTOR, "div.bv-content-summary-body-text")
 
-            phone_comments = []
-            for i in range(len(username_comments_container)):
-                comentario = Comentario()
+                phone_comments = []
+                for i in range(len(username_comments_container)):
+                    comentario = Comentario()
 
-                try:
-                    comentario.username = username_comments_container[i].text.strip()
-                except IndexError:
-                    print("IndexError captured...")
+                    try:
+                        comentario.username = username_comments_container[i].text.strip()
+                    except IndexError:
+                        print("IndexError captured...")
 
-                try:
-                    comentario.content = comment_texts[i].text.strip()
-                except IndexError:
-                    print("IndexError captured...")
+                    try:
+                        comentario.content = comment_texts[i].text.strip()
+                    except IndexError:
+                        print("IndexError captured...")
 
-                phone_comments.append(comentario)
+                    phone_comments.append(comentario)
+
                 producto.comentarios = phone_comments
 
             result = insert_product(producto.to_dict())
