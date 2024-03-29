@@ -50,8 +50,10 @@ def falabella_web_scraper_bot(driver):
             producto.imagen_url = driver.find_element(By.CSS_SELECTOR, "img.jsx-2487856160").get_attribute("src")
             producto.created_or_updated_at = datetime.now()
 
-            properties_button = driver.find_element(By.CSS_SELECTOR, "button#swatch-collapsed-id")
-            properties_button.click()
+            properties_button = driver.find_elements(By.CSS_SELECTOR, "button#swatch-collapsed-id")
+
+            if properties_button:
+                properties_button[0].click()
 
             properties_names = driver.find_elements(By.CSS_SELECTOR,
                                                     "td.property-name")
@@ -106,7 +108,17 @@ def falabella_web_scraper_bot(driver):
                     (phone_characteristics
                      .append(Caracteristica("Capacidad de almacenamiento", properties_values[i].text.strip())))
 
+                elif properties_names[i].text.__contains__("Marca y modelo del procesador"):
+                    (phone_characteristics
+                     .append(Caracteristica("Marca y modelo del procesador", properties_values[i].text.strip())))
+
             producto.caracteristicas = phone_characteristics
+
+            comments_button = driver.find_elements(By.CSS_SELECTOR, "button.bv-content-btn.bv-content-btn-pages"
+                                                                   ".bv-content-btn-pages-load-more.bv-focusable")
+
+            if comments_button:
+                comments_button[0].click()
 
             username_comments_container = driver.find_elements(By.CSS_SELECTOR, "div.bv-author")
             comment_texts = driver.find_elements(By.CSS_SELECTOR, "div.bv-content-summary-body-text")
@@ -116,8 +128,7 @@ def falabella_web_scraper_bot(driver):
                 comentario = Comentario()
 
                 try:
-                    comentario.username = (username_comments_container[i].find_elements(By.CSS_SELECTOR, "span")[1]
-                                           .text.strip())
+                    comentario.username = username_comments_container[i].text.strip()
                 except IndexError:
                     print("IndexError captured...")
 
@@ -127,12 +138,11 @@ def falabella_web_scraper_bot(driver):
                     print("IndexError captured...")
 
                 phone_comments.append(comentario)
+                producto.comentarios = phone_comments
 
             result = insert_product(producto.to_dict())
 
-            if result.upserted_id is not None:
-                phone_scraper_counter += 1
-            elif result.modified_count > 0:
+            if result.upserted_id is not None or result.modified_count > 0:
                 phone_scraper_counter += 1
 
         except Exception as e:

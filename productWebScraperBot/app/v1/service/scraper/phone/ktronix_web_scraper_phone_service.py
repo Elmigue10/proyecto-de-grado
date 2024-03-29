@@ -171,9 +171,7 @@ def ktronix_web_scraper_bot(driver):
 
             result = insert_product(producto.to_dict())
 
-            if result.upserted_id is not None:
-                phone_scraper_counter += 1
-            elif result.modified_count > 0:
+            if result.upserted_id is not None or result.modified_count > 0:
                 phone_scraper_counter += 1
 
         except Exception as e:
