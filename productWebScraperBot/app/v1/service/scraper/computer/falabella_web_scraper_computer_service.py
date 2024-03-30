@@ -45,15 +45,17 @@ def falabella_web_scraper_bot(driver):
             producto.url = computer_url
             producto.marca = marca
             producto.precio = precio
-            producto.categoria = "smartcomputer"
+            producto.categoria = "computer"
             producto.plataforma = "falabella"
             producto.imagen_url = driver.find_element(By.CSS_SELECTOR, "img.jsx-2487856160").get_attribute("src")
             producto.created_or_updated_at = datetime.now()
 
-            properties_button = driver.find_elements(By.CSS_SELECTOR, "button#swatch-collapsed-id")
+            properties_buttons = driver.find_elements(By.CSS_SELECTOR, "button#swatch-collapsed-id")
 
-            if properties_button:
-                properties_button[0].click()
+            if properties_buttons:
+                properties_button = properties_buttons[0]
+
+                driver.execute_script("arguments[0].click();", properties_button)
 
                 properties_names = driver.find_elements(By.CSS_SELECTOR,
                                                         "td.property-name")
