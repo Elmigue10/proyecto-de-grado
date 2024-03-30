@@ -1,6 +1,7 @@
+import random
+
 import pymongo
 from bson import ObjectId
-from fastapi_pagination import paginate
 
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 database = client["web-scraper"]
@@ -15,14 +16,10 @@ def insert_product(product):
 
 
 def find_all(skip, limit):
-    total_items = collection.count_documents({})
 
-    pipeline = [
-        {'$sample': {'size': limit}},
-        {'$skip': skip},
-        {'$limit': limit}
-    ]
-    results = collection.aggregate(pipeline)
+    results = collection.find().skip(skip).limit(limit)
+
+    total_items = collection.count_documents({})
 
     return {
         'products': list(results),
@@ -83,3 +80,14 @@ def find_categories():
 def find_platforms():
     distinct_platforms = collection.distinct("plataforma")
     return distinct_platforms
+
+
+def reorganize():
+    all_documents = list(collection.find())
+    random.shuffle(all_documents)
+    collection.delete_many({})
+    collection.insert_many(all_documents)
+    return {
+        'message': "OK",
+        'status': 200
+    }

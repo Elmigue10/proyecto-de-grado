@@ -33,3 +33,7 @@ def find_by_id(prorduct_find_by_id_request):
             'message': "NOT_FOUND",
             'status': 404
         }
+
+
+def reorganize():
+    return mongodb_config.reorganize()
