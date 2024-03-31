@@ -1,3 +1,4 @@
+import datetime
 import time
 
 from selenium.webdriver.common.by import By
@@ -52,6 +53,7 @@ def mercado_web_scraper_bot(driver):
             producto.categoria = "computer"
 
             producto.plataforma = "mercado-libre"
+            producto.created_or_updated_at = datetime.now()
 
             specifications_names = driver.find_elements(By.CSS_SELECTOR, "div.andes-table__header__container")
             specifications_values = driver.find_elements(By.CSS_SELECTOR, "span.andes-table__column--value")
