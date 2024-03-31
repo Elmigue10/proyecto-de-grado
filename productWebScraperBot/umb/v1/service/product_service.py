@@ -11,7 +11,7 @@ def find_all(skip, limit):
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"],
+        'totalProductos': results["total_items"],
         'marcas': brands,
         'categorias': categories,
         'plataformas': platforms
