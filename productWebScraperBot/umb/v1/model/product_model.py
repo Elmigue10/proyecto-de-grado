@@ -114,7 +114,7 @@ class Producto:
             'precio': self._precio,
             'categoria': self._categoria,
             'plataforma': self._plataforma,
-            'imagen_url': self._imagen_url,
+            'imagenUrl': self._imagen_url,
             'caracteristicas': [caracteristica.to_dict() for caracteristica in self._caracteristicas],
             'comentarios': [comentario.to_dict() for comentario in self._comentarios],
             'createdOrUpdatedAt': self._created_or_updated_at
