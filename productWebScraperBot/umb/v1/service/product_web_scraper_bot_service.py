@@ -1,9 +1,9 @@
-from app.v1.config import chrome_driver_config
-from app.v1.model.scraper_request_model import ScraperRequest
-from app.v1.service.scraper.computer import ktronix_web_scraper_computer_service, \
+from umb.v1.config import chrome_driver_config
+from umb.v1.model.scraper_request_model import ScraperRequest
+from umb.v1.service.scraper.computer import ktronix_web_scraper_computer_service, \
     falabella_web_scraper_computer_service, exito_web_scraper_computer_service, \
     mercado_libre_web_scraper_computer_service
-from app.v1.service.scraper.phone import ktronix_web_scraper_phone_service, falabella_web_scraper_phone_service, \
+from umb.v1.service.scraper.phone import ktronix_web_scraper_phone_service, falabella_web_scraper_phone_service, \
     mercado_libre_web_scraper_phone_service, exito_web_scraper_phone_service
 
 

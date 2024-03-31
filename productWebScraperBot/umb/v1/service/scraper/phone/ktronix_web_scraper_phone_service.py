@@ -3,10 +3,10 @@ from datetime import datetime
 
 from selenium.webdriver.common.by import By
 
-from app.v1.config.mongodb_config import insert_product
-from app.v1.model.characteristic_model import Caracteristica
-from app.v1.model.comment_model import Comentario
-from app.v1.model.product_model import Producto
+from umb.v1.config.mongodb_config import insert_product
+from umb.v1.model.characteristic_model import Caracteristica
+from umb.v1.model.comment_model import Comentario
+from umb.v1.model.product_model import Producto
 
 
 def ktronix_web_scraper_bot(driver):

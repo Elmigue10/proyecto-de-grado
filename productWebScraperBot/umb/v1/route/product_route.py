@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Response, status
 
-from app.v1.model.product_find_by_id_request_model import ProductFindByIdRequestModel
-from app.v1.model.scraper_request_model import ScraperRequest
-from app.v1.service import product_web_scraper_bot_service, product_service
+from umb.v1.model.product_find_by_id_request_model import ProductFindByIdRequestModel
+from umb.v1.model.scraper_request_model import ScraperRequest
+from umb.v1.service import product_web_scraper_bot_service, product_service
 
 api_router = APIRouter()
 

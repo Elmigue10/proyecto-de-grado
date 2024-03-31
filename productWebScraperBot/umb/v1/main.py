@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.v1.route import product_route
+from umb.v1.route import product_route
 
 app = FastAPI()
 

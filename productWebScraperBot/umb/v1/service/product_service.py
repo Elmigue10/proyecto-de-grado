@@ -1,4 +1,4 @@
-from app.v1.config import mongodb_config
+from umb.v1.config import mongodb_config
 
 
 def find_all(skip, limit):
