@@ -2,6 +2,7 @@ package umb.v1.informationandproductmanagement.business.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import umb.v1.informationandproductmanagement.business.service.IProductService;
@@ -12,7 +13,7 @@ import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductLi
 
 @RestController
 @Slf4j
-@RequestMapping("/product")
+@RequestMapping(value = "/product", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductController {
 
     private final IProductService productService;
