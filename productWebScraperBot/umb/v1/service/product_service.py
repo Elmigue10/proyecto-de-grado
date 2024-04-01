@@ -43,7 +43,7 @@ def find_by_brand(brand_name, skip, limit):
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"]
+        'totalProductos': results["total_items"]
     }
 
 
@@ -55,7 +55,7 @@ def find_by_category(category_name, skip, limit):
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"]
+        'totalProductos': results["total_items"]
     }
 
 
@@ -67,7 +67,7 @@ def find_by_platform(platform_name, skip, limit):
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"]
+        'totalProductos': results["total_items"]
     }
 
 
@@ -79,7 +79,7 @@ def find_by_name(product_name, skip, limit):
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"]
+        'totalProductos': results["total_items"]
     }
 
 
@@ -92,7 +92,7 @@ def find_by_price_range(min_price, max_price, skip, limit):
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"]
+        'totalProductos': results["total_items"]
     }
 
 
@@ -105,7 +105,7 @@ def find_by_brand_and_category(brand_name, category_name, skip, limit):
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"]
+        'totalProductos': results["total_items"]
     }
 
 
@@ -118,7 +118,7 @@ def find_by_platform_and_category(platform_name, category_name, skip, limit):
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"]
+        'totalProductos': results["total_items"]
     }
 
 
@@ -132,7 +132,7 @@ def find_by_brand_category_and_platform(brand_name, category_name, platform_name
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"]
+        'totalProductos': results["total_items"]
     }
 
 
@@ -143,7 +143,7 @@ def find_by_ram_memory(ram_memory, skip, limit):
         'message': "OK",
         'status': 200,
         'productos': results["products"],
-        'total_productos': results["total_items"]
+        'totalProductos': results["total_items"]
     }
 
 
