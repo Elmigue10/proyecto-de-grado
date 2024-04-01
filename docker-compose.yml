@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  information-and-product-management:
+    image: elmigue10/information-and-product-management:latest
+    networks:
+      - umb
+    ports:
+      - "8080:8080"
+
+  product-web-scraper-bot:
+    image: elmigue10/product-web-scraper-bot:latest
+    networks:
+      - umb
+    ports:
+      - "8000:8000"
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - umb
+    ports:
+      - "27017:27017"
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: comparatech
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - umb
+    ports:
+      - "5432:5432"
+
+networks:
+  umb:
+
+volumes:
+  mongodb_data:
+  postgres_data:

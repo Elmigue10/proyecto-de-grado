@@ -1,0 +1,20 @@
+DOCKERIZAR:
+JAVA:
+mvn clean package
+docker build -t information-and-product-management .
+docker tag information-and-product-management elmigue10/information-and-product-management
+docker push elmigue10/information-and-product-management
+
+docker run -p 8080:8080 information-and-product-management
+
+PYTHON:
+docker build -t product-web-scraper-bot .
+docker tag product-web-scraper-bot elmigue10/product-web-scraper-bot
+docker push elmigue10/product-web-scraper-bot
+
+docker run -p 8000:8000 product-web-scraper-bot
+
+
+DOCKER-COMPOSE:
+docker-compose up
+docker-compose run --rm init_script
