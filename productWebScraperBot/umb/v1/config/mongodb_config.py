@@ -149,16 +149,23 @@ def find_by_brand_category_and_platform(brand_name, category_name, platform_name
     }
 
 
-def find_by_ram_memory(ram_memory, skip, limit):
-    query = {"caracteristicas":
+def find_by_ram_memory(ram_memory, category_name, skip, limit):
+    category_regex = re.compile(f'^{re.escape(category_name)}$', re.IGNORECASE)
+    category_query = {'categoria': {'$regex': category_regex}}
+
+    query_ram = {"caracteristicas":
                                       {"$elemMatch":
                                            {"nombre": {"$regex": "ram", "$options": "i"},
                                             "valor": {"$regex": ram_memory}
                                             }
                                        }
                                   }
+
+    query = {'$and': [query_ram, category_query]}
+
     results = collection.find(query).skip(skip).limit(limit)
     total_items = collection.count_documents(query)
+
     return {
         'products': list(results),
         'total_items': total_items

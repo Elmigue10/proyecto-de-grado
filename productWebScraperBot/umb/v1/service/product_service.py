@@ -71,9 +71,10 @@ def find_by_platform(platform_name, skip, limit):
     }
 
 
-def find_by_name(product_name, skip, limit):
-    results = mongodb_config.find_by_name(product_name.strip(),
-                                          skip, limit)
+def find_by_name(product_find_by_name_request):
+    results = mongodb_config.find_by_name(product_find_by_name_request.product_name.strip(),
+                                          product_find_by_name_request.skip,
+                                          product_find_by_name_request.limit)
 
     return {
         'message': "OK",
@@ -136,8 +137,9 @@ def find_by_brand_category_and_platform(brand_name, category_name, platform_name
     }
 
 
-def find_by_ram_memory(ram_memory, skip, limit):
-    results = mongodb_config.find_by_ram_memory(ram_memory.strip(), skip, limit)
+def find_by_ram_memory(ram_memory, category_name, skip, limit):
+    results = mongodb_config.find_by_ram_memory(ram_memory.strip(), category_name.strip(),
+                                                skip, limit)
 
     return {
         'message': "OK",
