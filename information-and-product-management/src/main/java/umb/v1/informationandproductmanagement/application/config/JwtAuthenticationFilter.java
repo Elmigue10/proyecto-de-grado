@@ -17,8 +17,6 @@ import umb.v1.informationandproductmanagement.business.service.JwtService;
 import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import static umb.v1.informationandproductmanagement.domain.utility.Constant.UNAUTHORIZED;
 

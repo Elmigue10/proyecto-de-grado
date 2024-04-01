@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "655aa291-7c29-4406-85dd-6ba845d0b057",
+		"name": "umb-proyecto-grado",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16085356"
+	},
+	"item": [
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "find-all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ1VTVE9NRVIiLCJFTUFJTCI6Im1pZ3VlbEBlbWVhaWwuY29tIiwic3ViIjoibWlndWVsQGVtZWFpbC5jb20iLCJpYXQiOjE3MTIwMDU4NzMsImV4cCI6MTcxMjA5MjI3M30.ivrwBuxVDdIjKhUxWWRd8ygkJDPrhJ0XQBKxxDvsY04",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product?skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productoId\": \"Celular Motorola G14 128GB | 4GB RAM | Camara Posterior 50MP | Pantalla 6.5 Pulgadas-falabella\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-brand",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-brand?brand_name=apple&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-brand"
+							],
+							"query": [
+								{
+									"key": "brand_name",
+									"value": "apple"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-category?category_name=computer&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-category"
+							],
+							"query": [
+								{
+									"key": "category_name",
+									"value": "computer"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-platform",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-platform?platform_name=exito&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-platform"
+							],
+							"query": [
+								{
+									"key": "platform_name",
+									"value": "exito"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"celular motorola g\",\r\n    \"skip\": 0,\r\n    \"limit\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-price-range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-price-range?min_price=1500000&max_price=2100000&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-price-range"
+							],
+							"query": [
+								{
+									"key": "min_price",
+									"value": "1500000"
+								},
+								{
+									"key": "max_price",
+									"value": "2100000"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-brand-and-category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-brand-and-category?brand_name=samsung&category_name=smartphone&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-brand-and-category"
+							],
+							"query": [
+								{
+									"key": "brand_name",
+									"value": "samsung"
+								},
+								{
+									"key": "category_name",
+									"value": "smartphone"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-platform-and-category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-platform-and-category?platform_name=ktronix&category_name=smartphone&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-platform-and-category"
+							],
+							"query": [
+								{
+									"key": "platform_name",
+									"value": "ktronix"
+								},
+								{
+									"key": "category_name",
+									"value": "smartphone"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-brand-category-and-platform",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-brand-category-and-platform?brand_name=apple&platform_name=ktronix&category_name=smartphone&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-brand-category-and-platform"
+							],
+							"query": [
+								{
+									"key": "brand_name",
+									"value": "apple"
+								},
+								{
+									"key": "platform_name",
+									"value": "ktronix"
+								},
+								{
+									"key": "category_name",
+									"value": "smartphone"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-ram-memory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-ram-memory?ram_memory=8&category_name=smartphone&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-ram-memory"
+							],
+							"query": [
+								{
+									"key": "ram_memory",
+									"value": "8"
+								},
+								{
+									"key": "category_name",
+									"value": "smartphone"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correoElectronico\": \"miguel@emeail.com\",\r\n    \"contrasena\": \"cualclave123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/customer/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"customer",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correoElectronico\": \"miguel@emeail.com\",\r\n    \"contrasena\": \"cualclave123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

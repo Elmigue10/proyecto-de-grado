@@ -2,11 +2,9 @@ package umb.v1.informationandproductmanagement.business.service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import umb.v1.informationandproductmanagement.business.client.ProductClient;
-import umb.v1.informationandproductmanagement.domain.exception.ApiException;
 import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByIdDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByNameDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;

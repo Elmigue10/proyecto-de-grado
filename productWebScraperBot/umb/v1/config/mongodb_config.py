@@ -3,7 +3,7 @@ import re
 
 import pymongo
 
-client = pymongo.MongoClient("mongodb://mongodb/")
+client = pymongo.MongoClient("mongodb://mongo/")
 database = client["web-scraper"]
 collection = database["products"]
 

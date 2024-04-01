@@ -17,4 +17,3 @@ docker run -p 8000:8000 product-web-scraper-bot
 
 DOCKER-COMPOSE:
 docker-compose up
-docker-compose run --rm init_script
