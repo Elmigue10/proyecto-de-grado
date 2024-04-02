@@ -8,26 +8,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import umb.v1.informationandproductmanagement.business.service.ICustomerService;
-import umb.v1.informationandproductmanagement.domain.model.dto.CustomerDTO;
+import umb.v1.informationandproductmanagement.business.service.IUserService;
+import umb.v1.informationandproductmanagement.domain.model.dto.UserDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
 
 @RestController
 @Slf4j
-@RequestMapping(value = "/customer", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CustomerController {
+@RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+public class UserController {
 
-    private final ICustomerService customerService;
+    private final IUserService userService;
 
-    public CustomerController(ICustomerService customerService) {
-        this.customerService = customerService;
+    public UserController(IUserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ResponseProductDTO> save(@RequestBody CustomerDTO customer){
+    public ResponseEntity<ResponseProductDTO> save(@RequestBody UserDTO user){
         log.info("arrived request for save...");
 
-        ResponseProductDTO response = customerService.save(customer);
+        ResponseProductDTO response = userService.save(user);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

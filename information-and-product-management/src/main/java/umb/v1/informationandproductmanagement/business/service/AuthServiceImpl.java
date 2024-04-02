@@ -1,7 +1,6 @@
 package umb.v1.informationandproductmanagement.business.service;
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,21 +9,27 @@ import org.springframework.stereotype.Service;
 import umb.v1.informationandproductmanagement.domain.exception.ApiException;
 import umb.v1.informationandproductmanagement.domain.model.dto.AuthRequestDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.AuthResponseDTO;
-import umb.v1.informationandproductmanagement.domain.model.entity.CustomerEntity;
-import umb.v1.informationandproductmanagement.domain.repository.AdminRepository;
-import umb.v1.informationandproductmanagement.domain.repository.CustomerRepository;
+import umb.v1.informationandproductmanagement.domain.model.entity.UserEntity;
+import umb.v1.informationandproductmanagement.domain.model.entity.UserWithRoleEntity;
+import umb.v1.informationandproductmanagement.domain.repository.UserWithRoleEntityRepository;
 
 import static umb.v1.informationandproductmanagement.domain.utility.Constant.OK;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class AuthServiceImpl implements IAuthService {
 
     private final AuthenticationManager authenticationManager;
-    private final CustomerRepository customerRepository;
-    private final AdminRepository adminRepository;
+    private final UserWithRoleEntityRepository userRepository;
     private final JwtService jwtService;
+
+    public AuthServiceImpl(AuthenticationManager authenticationManager,
+                           UserWithRoleEntityRepository userRepository,
+                           JwtService jwtService) {
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
+        this.jwtService = jwtService;
+    }
 
     @Override
     public AuthResponseDTO auth(AuthRequestDTO authRequest) {
@@ -35,7 +40,7 @@ public class AuthServiceImpl implements IAuthService {
                 )
         );
 
-        CustomerEntity user = customerRepository.findByCorreoElectronico(authRequest.getMail())
+        UserWithRoleEntity user = userRepository.findByCorreoElectronico(authRequest.getMail())
                 .orElseThrow(() -> new ApiException("Usuario no econtrado: " + authRequest.getMail(), 404));
 
         String token = jwtService.generateToken(user);
@@ -46,6 +51,7 @@ public class AuthServiceImpl implements IAuthService {
                 .status(200)
                 .accessToken(token)
                 .refreshToken(refreshToken)
+                .rol(user.getRole().getRol())
                 .build();
     }
 
@@ -60,7 +66,7 @@ public class AuthServiceImpl implements IAuthService {
         refreshToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(refreshToken);
         if (userEmail != null) {
-            CustomerEntity user = customerRepository.findByCorreoElectronico(userEmail)
+            UserWithRoleEntity user = userRepository.findByCorreoElectronico(userEmail)
                     .orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
                 String accessToken = jwtService.generateToken(user);
@@ -69,6 +75,7 @@ public class AuthServiceImpl implements IAuthService {
                         .status(200)
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
+                        .rol(user.getRole().getRol())
                         .build();
             }
         }

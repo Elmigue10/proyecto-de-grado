@@ -10,20 +10,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import umb.v1.informationandproductmanagement.domain.exception.ApiException;
-import umb.v1.informationandproductmanagement.domain.repository.CustomerRepository;
+import umb.v1.informationandproductmanagement.domain.repository.UserWithRoleEntityRepository;
 
 @Configuration
 public class ApplicationConfig {
 
-    private final CustomerRepository customerRepository;
+    private final UserWithRoleEntityRepository userRepository;
 
-    public ApplicationConfig(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public ApplicationConfig(UserWithRoleEntityRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return mail -> customerRepository.findByCorreoElectronico(mail)
+        return mail -> userRepository.findByCorreoElectronico(mail)
                 .orElseThrow(() -> new ApiException("Claims no validos: Usuario no encontrado", 404));
     }
 

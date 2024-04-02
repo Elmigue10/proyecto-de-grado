@@ -20,4 +20,7 @@ public class AuthResponseDTO {
     @JsonProperty("refreshToken")
     private String refreshToken;
 
+    @JsonProperty("rol")
+    private String rol;
+
 }

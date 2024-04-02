@@ -6,7 +6,10 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class CustomerDTO {
+public class UserDTO {
+
+    @JsonProperty("nombreCompleto")
+    private String nombreCompleto;
 
     @JsonProperty("correoElectronico")
     private String correoElectronico;

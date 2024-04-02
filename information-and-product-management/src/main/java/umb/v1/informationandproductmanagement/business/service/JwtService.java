@@ -8,7 +8,8 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import umb.v1.informationandproductmanagement.domain.model.entity.CustomerEntity;
+import umb.v1.informationandproductmanagement.domain.model.entity.UserEntity;
+import umb.v1.informationandproductmanagement.domain.model.entity.UserWithRoleEntity;
 
 import java.security.Key;
 import java.util.Date;
@@ -37,11 +38,11 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(CustomerEntity customer) {
+    public String generateToken(UserWithRoleEntity user) {
         Map<String, Object> extraClaims = new HashMap<>();
-        extraClaims.put(ROLE, CUSTOMER);
-        extraClaims.put(EMAIL, customer.getCorreoElectronico());
-        return generateToken(extraClaims, customer);
+        extraClaims.put(ROLE, user.getRole().getRol());
+        extraClaims.put(EMAIL, user.getCorreoElectronico());
+        return generateToken(extraClaims, user);
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {

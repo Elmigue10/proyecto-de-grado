@@ -33,24 +33,24 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth",
                                 "/auth/refresh-token",
-                                "/customer/save",
+                                "/user/save",
                                 "/v3/api-docs",
                                 "/v3/api-docs/**",
                                 "/swagger-resources",
                                 "/swagger-resources/**")
                         .permitAll()
 
-                        .requestMatchers("/product").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-id").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-brand").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-category").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-platform").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-name").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-price-range").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-brand-and-category").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-platform-and-category").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-brand-category-and-platform").hasRole(CUSTOMER)
-                        .requestMatchers("/product/find-by-ram-memory").hasRole(CUSTOMER)
+                        .requestMatchers("/product").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-id").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-brand").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-category").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-platform").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-name").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-price-range").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-brand-and-category").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-platform-and-category").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-brand-category-and-platform").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-ram-memory").hasRole(CLIENTE)
                         .requestMatchers("/product/web-scraper-bot").hasRole(ADMIN)
                         .anyRequest()
                         .authenticated()
