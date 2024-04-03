@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByIdDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByNameDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductListDTO;
+import umb.v1.informationandproductmanagement.domain.model.dto.*;
 
 @FeignClient(value = "product-client", url = "${service.values.client.product.url}")
 public interface ProductClient {
@@ -67,4 +64,7 @@ public interface ProductClient {
                                            @RequestParam("category_name") String categoryName,
                                            @RequestParam("skip") int skip,
                                            @RequestParam("limit") int limit);
+
+    @PostMapping("/find-by-id-list")
+    ResponseProductListDTO findByIdList(@RequestBody RequestFindByIdListDTO request);
 }

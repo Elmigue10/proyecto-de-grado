@@ -5,16 +5,15 @@ import lombok.Getter;
 
 @Getter
 @Entity
-@Table(name = "rol")
-public class RoleEntity {
+@Table(name = "tipo_solicitud_pqrs")
+public class PqrsRequestTypeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Getter
-    @Column(name = "rol", nullable = false)
-    private String rol;
+    @Column(name = "tipo_solicitud")
+    private String tipoSolicitud;
 
 }

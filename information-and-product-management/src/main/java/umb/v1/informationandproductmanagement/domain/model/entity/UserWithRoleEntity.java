@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,10 +32,10 @@ public class UserWithRoleEntity implements UserDetails {
     private String contrasena;
 
     @Column(name = "fecha_registro")
-    private Date fechaRegistro;
+    private Timestamp fechaRegistro;
 
     @Column(name = "fecha_actualiza")
-    private Date fechaActualiza;
+    private Timestamp fechaActualiza;
 
     @Column(name = "estado")
     private boolean estado;

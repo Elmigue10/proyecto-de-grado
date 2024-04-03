@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import umb.v1.informationandproductmanagement.business.service.IAuthService;
+import umb.v1.informationandproductmanagement.business.service.interfaces.IAuthService;
 import umb.v1.informationandproductmanagement.domain.model.dto.AuthRequestDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.AuthResponseDTO;
 

@@ -19,5 +19,6 @@ public class Constant {
     public static final String USER_ALREADY_EXISTS = "USER_ALREADY_EXISTS";
     public static final String UNAUTHORIZED = "UNAUTHORIZED";
     public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+    public static final String AUTHORIZATION_HEADER = "authorization";
 
 }

@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import umb.v1.informationandproductmanagement.business.service.JwtService;
+import umb.v1.informationandproductmanagement.business.service.impl.JwtService;
 import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
 
 import java.io.IOException;

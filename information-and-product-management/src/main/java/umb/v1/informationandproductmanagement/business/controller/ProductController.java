@@ -5,11 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import umb.v1.informationandproductmanagement.business.service.IProductService;
+import umb.v1.informationandproductmanagement.business.service.interfaces.IProductService;
 import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByIdDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByNameDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductListDTO;
+
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -33,10 +35,11 @@ public class ProductController {
     }
 
     @PostMapping("/find-by-id")
-    public ResponseEntity<ResponseProductDTO> findById(@RequestBody RequestFindByIdDTO request) {
+    public ResponseEntity<ResponseProductDTO> findById(@RequestBody RequestFindByIdDTO request,
+                                                       @RequestHeader Map<String, String> requestHeaders) {
         log.info("arrived request for find-by-id. {}", request);
 
-        ResponseProductDTO productResponse = productService.findById(request);
+        ResponseProductDTO productResponse = productService.findById(request, requestHeaders);
 
         log.info("find-by-id response: {}", productResponse);
 
@@ -85,10 +88,11 @@ public class ProductController {
     }
 
     @PostMapping("/find-by-name")
-    public ResponseEntity<ResponseProductListDTO> findByName(@RequestBody RequestFindByNameDTO request) {
-        log.info("arrived request for find-by-name. {}", request);
+    public ResponseEntity<ResponseProductListDTO> findByName(@RequestBody RequestFindByNameDTO requestBody,
+                                                             @RequestHeader Map<String, String> requestHeaders) {
+        log.info("arrived request for find-by-name. {}", requestBody);
 
-        ResponseProductListDTO productsResponse = productService.findByName(request);
+        ResponseProductListDTO productsResponse = productService.findByName(requestBody, requestHeaders);
 
         log.info("find-by-name response: {}", productsResponse);
 

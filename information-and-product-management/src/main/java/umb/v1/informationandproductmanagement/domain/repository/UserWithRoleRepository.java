@@ -5,7 +5,7 @@ import umb.v1.informationandproductmanagement.domain.model.entity.UserWithRoleEn
 
 import java.util.Optional;
 
-public interface UserWithRoleEntityRepository extends JpaRepository<UserWithRoleEntity, Long> {
+public interface UserWithRoleRepository extends JpaRepository<UserWithRoleEntity, Long> {
 
     Optional<UserWithRoleEntity> findByCorreoElectronico(String correoElectronico);
 

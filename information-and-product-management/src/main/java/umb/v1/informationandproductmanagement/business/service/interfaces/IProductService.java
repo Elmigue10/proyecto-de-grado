@@ -1,14 +1,16 @@
-package umb.v1.informationandproductmanagement.business.service;
+package umb.v1.informationandproductmanagement.business.service.interfaces;
 
 import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByIdDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByNameDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductListDTO;
 
+import java.util.Map;
+
 public interface IProductService {
     ResponseProductListDTO findAll(int skip, int limit);
 
-    ResponseProductDTO findById(RequestFindByIdDTO request);
+    ResponseProductDTO findById(RequestFindByIdDTO request, Map<String, String> requestHeaders);
 
     ResponseProductListDTO findByBrand(String brandName, int skip, int limit);
 
@@ -16,7 +18,7 @@ public interface IProductService {
 
     ResponseProductListDTO findByPlatform(String platformName, int skip, int limit);
 
-    ResponseProductListDTO findByName(RequestFindByNameDTO request);
+    ResponseProductListDTO findByName(RequestFindByNameDTO request, Map<String, String> requestHeaders);
 
     ResponseProductListDTO findByPriceRange(String minPrice, String maxPrice, int skip, int limit);
 

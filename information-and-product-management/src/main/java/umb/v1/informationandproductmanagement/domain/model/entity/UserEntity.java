@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Builder
 @Getter
@@ -27,16 +27,16 @@ public class UserEntity {
     private String contrasena;
 
     @Column(name = "fecha_registro")
-    private Date fechaRegistro;
+    private Timestamp fechaRegistro;
 
     @Column(name = "fecha_actualiza")
-    private Date fechaActualiza;
+    private Timestamp fechaActualiza;
 
     @Column(name = "rol_id")
     private int rolId;
 
     public UserEntity(Long id, String nombreCompleto, String correoElectronico, String contrasena,
-                      Date fechaRegistro, Date fechaActualiza, int rolId) {
+                      Timestamp fechaRegistro, Timestamp fechaActualiza, int rolId) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.correoElectronico = correoElectronico;

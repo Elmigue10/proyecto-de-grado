@@ -1,4 +1,4 @@
-package umb.v1.informationandproductmanagement.business.service;
+package umb.v1.informationandproductmanagement.business.service.impl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -7,8 +7,8 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-import umb.v1.informationandproductmanagement.domain.model.entity.UserEntity;
+import org.springframework.stereotype.Service;
+import umb.v1.informationandproductmanagement.business.service.interfaces.IJwtService;
 import umb.v1.informationandproductmanagement.domain.model.entity.UserWithRoleEntity;
 
 import java.security.Key;
@@ -19,8 +19,8 @@ import java.util.function.Function;
 
 import static umb.v1.informationandproductmanagement.domain.utility.Constant.*;
 
-@Component
-public class JwtService {
+@Service
+public class JwtService implements IJwtService {
 
     @Value("${service.values.security.jwt.secret-key}")
     private String secretKey;
@@ -29,15 +29,18 @@ public class JwtService {
     @Value("${service.values.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
 
+    @Override
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
+    @Override
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
+    @Override
     public String generateToken(UserWithRoleEntity user) {
         Map<String, Object> extraClaims = new HashMap<>();
         extraClaims.put(ROLE, user.getRole().getRol());
@@ -45,10 +48,12 @@ public class JwtService {
         return generateToken(extraClaims, user);
     }
 
+    @Override
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
+    @Override
     public String generateRefreshToken(UserDetails userDetails) {
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
     }
@@ -64,6 +69,7 @@ public class JwtService {
                 .compact();
     }
 
+    @Override
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);

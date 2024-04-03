@@ -1,4 +1,4 @@
-package umb.v1.informationandproductmanagement.business.service;
+package umb.v1.informationandproductmanagement.business.service.impl;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -6,12 +6,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import umb.v1.informationandproductmanagement.business.service.interfaces.IAuthService;
+import umb.v1.informationandproductmanagement.business.service.interfaces.IJwtService;
 import umb.v1.informationandproductmanagement.domain.exception.ApiException;
 import umb.v1.informationandproductmanagement.domain.model.dto.AuthRequestDTO;
 import umb.v1.informationandproductmanagement.domain.model.dto.AuthResponseDTO;
-import umb.v1.informationandproductmanagement.domain.model.entity.UserEntity;
 import umb.v1.informationandproductmanagement.domain.model.entity.UserWithRoleEntity;
-import umb.v1.informationandproductmanagement.domain.repository.UserWithRoleEntityRepository;
+import umb.v1.informationandproductmanagement.domain.repository.UserWithRoleRepository;
 
 import static umb.v1.informationandproductmanagement.domain.utility.Constant.OK;
 
@@ -20,12 +21,12 @@ import static umb.v1.informationandproductmanagement.domain.utility.Constant.OK;
 public class AuthServiceImpl implements IAuthService {
 
     private final AuthenticationManager authenticationManager;
-    private final UserWithRoleEntityRepository userRepository;
-    private final JwtService jwtService;
+    private final UserWithRoleRepository userRepository;
+    private final IJwtService jwtService;
 
     public AuthServiceImpl(AuthenticationManager authenticationManager,
-                           UserWithRoleEntityRepository userRepository,
-                           JwtService jwtService) {
+                           UserWithRoleRepository userRepository,
+                           IJwtService jwtService) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.jwtService = jwtService;

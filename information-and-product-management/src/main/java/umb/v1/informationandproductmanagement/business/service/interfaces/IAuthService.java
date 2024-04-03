@@ -1,4 +1,4 @@
-package umb.v1.informationandproductmanagement.business.service;
+package umb.v1.informationandproductmanagement.business.service.interfaces;
 
 import jakarta.servlet.http.HttpServletRequest;
 import umb.v1.informationandproductmanagement.domain.model.dto.AuthRequestDTO;

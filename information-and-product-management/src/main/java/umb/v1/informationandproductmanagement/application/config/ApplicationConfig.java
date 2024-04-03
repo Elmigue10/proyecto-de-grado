@@ -10,14 +10,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import umb.v1.informationandproductmanagement.domain.exception.ApiException;
-import umb.v1.informationandproductmanagement.domain.repository.UserWithRoleEntityRepository;
+import umb.v1.informationandproductmanagement.domain.repository.UserWithRoleRepository;
 
 @Configuration
 public class ApplicationConfig {
 
-    private final UserWithRoleEntityRepository userRepository;
+    private final UserWithRoleRepository userRepository;
 
-    public ApplicationConfig(UserWithRoleEntityRepository userRepository) {
+    public ApplicationConfig(UserWithRoleRepository userRepository) {
         this.userRepository = userRepository;
     }
 
