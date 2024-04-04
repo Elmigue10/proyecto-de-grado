@@ -99,12 +99,14 @@ public class ProductController {
     @GetMapping("/find-by-price-range")
     public ResponseEntity<ResponseProductListDTO> findByPriceRange(@RequestParam("min_price") String minPrice,
                                                                    @RequestParam("max_price") String maxPrice,
+                                                                   @RequestParam("category_name") String categoryName,
                                                                    @RequestParam("skip") int skip,
                                                                    @RequestParam("limit") int limit) {
         log.info("arrived request for find-by-price-range. min_prince: {}, max_price: {}, " +
                 "skip: {}, limit: {}", minPrice, maxPrice, skip, limit);
 
-        ResponseProductListDTO productsResponse = productService.findByPriceRange(minPrice, maxPrice, skip, limit);
+        ResponseProductListDTO productsResponse =
+                productService.findByPriceRange(minPrice, maxPrice, categoryName, skip, limit);
 
         log.info("find-by-price-range response: {}", productsResponse);
 

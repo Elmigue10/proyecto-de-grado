@@ -37,6 +37,7 @@ public interface ProductClient {
     @GetMapping("/find-by-price-range")
     ResponseProductListDTO findByPriceRange(@RequestParam("min_price") String minPrice,
                                             @RequestParam("max_price") String maxPrice,
+                                            @RequestParam("category_name") String categoryName,
                                             @RequestParam("skip") int skip,
                                             @RequestParam("limit") int limit);
 

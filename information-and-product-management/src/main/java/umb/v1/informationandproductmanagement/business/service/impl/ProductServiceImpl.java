@@ -105,8 +105,8 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ResponseProductListDTO findByPriceRange(String minPrice, String maxPrice, int skip, int limit) {
-        return productClient.findByPriceRange(minPrice, maxPrice, skip, limit);
+    public ResponseProductListDTO findByPriceRange(String minPrice, String maxPrice, String categoryName, int skip, int limit) {
+        return productClient.findByPriceRange(minPrice, maxPrice, categoryName, skip, limit);
     }
 
     @Override

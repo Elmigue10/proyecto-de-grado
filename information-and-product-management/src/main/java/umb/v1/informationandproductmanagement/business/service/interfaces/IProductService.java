@@ -17,7 +17,7 @@ public interface IProductService {
 
     ResponseProductListDTO findByName(RequestFindByNameDTO request, Map<String, String> requestHeaders);
 
-    ResponseProductListDTO findByPriceRange(String minPrice, String maxPrice, int skip, int limit);
+    ResponseProductListDTO findByPriceRange(String minPrice, String maxPrice, String categoryName, int skip, int limit);
 
     ResponseProductListDTO findByBrandAndCategory(String brandName, String categoryName, int skip, int limit);
 
