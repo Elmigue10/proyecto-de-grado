@@ -6,10 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IProductService;
-import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByIdDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByNameDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductListDTO;
+import umb.v1.informationandproductmanagement.domain.model.dto.*;
 
 import java.util.Map;
 
@@ -176,5 +173,27 @@ public class ProductController {
         log.info("find-by-ram-memory response: {}", productsResponse);
 
         return new ResponseEntity<>(productsResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/find-most-viewed")
+    public ResponseEntity<ResponseProductListDTO> findMostViewed(){
+        log.info("arrived request for find-most-viewed");
+
+        ResponseProductListDTO productsResponse = productService.findMostViewed();
+
+        log.info("find-most-viewed response: {}", productsResponse);
+
+        return new ResponseEntity<>(productsResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/web-scraper-bot")
+    public ResponseEntity<WebScraperResponseDTO> webScraperBot(@RequestBody WebScraperRequestDTO webScraperRequest){
+        log.info("arrived request for web-scraper-bot");
+
+        WebScraperResponseDTO webScraperResponse = productService.webScraperBot(webScraperRequest);
+
+        log.info("web-scraper-bot response: {}", webScraperResponse);
+
+        return new ResponseEntity<>(webScraperResponse, HttpStatus.OK);
     }
 }

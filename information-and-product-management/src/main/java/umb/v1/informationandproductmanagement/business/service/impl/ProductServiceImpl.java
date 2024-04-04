@@ -1,17 +1,12 @@
 package umb.v1.informationandproductmanagement.business.service.impl;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import umb.v1.informationandproductmanagement.business.client.ProductClient;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IJwtService;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IProductService;
 import umb.v1.informationandproductmanagement.domain.exception.ApiException;
-import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByIdDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByNameDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductListDTO;
+import umb.v1.informationandproductmanagement.domain.model.dto.*;
 import umb.v1.informationandproductmanagement.domain.model.entity.SearchHistoryEntity;
 import umb.v1.informationandproductmanagement.domain.model.entity.SearchResultEntity;
 import umb.v1.informationandproductmanagement.domain.model.entity.UserWithRoleEntity;
@@ -22,6 +17,7 @@ import umb.v1.informationandproductmanagement.domain.repository.UserWithRoleRepo
 import umb.v1.informationandproductmanagement.domain.repository.ViewedProductRepository;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 import static umb.v1.informationandproductmanagement.domain.utility.Constant.AUTHORIZATION_HEADER;
@@ -36,7 +32,6 @@ public class ProductServiceImpl implements IProductService {
     private final SearchResultRepository searchResultRepository;
     private final UserWithRoleRepository userRepository;
     private final IJwtService jwtService;
-    private final ObjectMapper objectMapper;
 
     public ProductServiceImpl(ProductClient productClient,
                               ViewedProductRepository viewedProductRepository,
@@ -50,8 +45,6 @@ public class ProductServiceImpl implements IProductService {
         this.searchResultRepository = searchResultRepository;
         this.userRepository = userRepository;
         this.jwtService = jwtService;
-        this.objectMapper = new ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     @Override
@@ -134,6 +127,26 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public ResponseProductListDTO findByRamMemory(String ramMemory, String categoryName, int skip, int limit) {
         return productClient.findByRamMemory(ramMemory, categoryName, skip, limit);
+    }
+
+    @Override
+    public ResponseProductListDTO findMostViewed() {
+        List<ViewedProductEntity> viewedProducts = viewedProductRepository.findByViews();
+
+        List<String> productIdList = viewedProducts.stream()
+                .map(ViewedProductEntity::getIdProductoMongodb)
+                .toList();
+
+        return productClient.findByIdList(RequestFindByIdListDTO.builder()
+                .idList(productIdList)
+                .skip(0)
+                .limit(productIdList.size())
+                .build());
+    }
+
+    @Override
+    public WebScraperResponseDTO webScraperBot(WebScraperRequestDTO webScraperRequest) {
+        return productClient.webScraperBot(webScraperRequest);
     }
 
     private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders){

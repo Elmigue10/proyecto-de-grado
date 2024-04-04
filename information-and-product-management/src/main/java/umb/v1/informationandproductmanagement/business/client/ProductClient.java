@@ -67,4 +67,7 @@ public interface ProductClient {
 
     @PostMapping("/find-by-id-list")
     ResponseProductListDTO findByIdList(@RequestBody RequestFindByIdListDTO request);
+
+    @PostMapping("/web-scraper-bot")
+    WebScraperResponseDTO webScraperBot(@RequestBody WebScraperRequestDTO webScraperRequest);
 }

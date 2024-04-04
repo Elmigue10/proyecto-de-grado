@@ -1,9 +1,6 @@
 package umb.v1.informationandproductmanagement.business.service.interfaces;
 
-import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByIdDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.RequestFindByNameDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductListDTO;
+import umb.v1.informationandproductmanagement.domain.model.dto.*;
 
 import java.util.Map;
 
@@ -29,4 +26,8 @@ public interface IProductService {
     ResponseProductListDTO findByBrandCategoryAndPlatform(String brandName, String categoryName, String platformName, int skip, int limit);
 
     ResponseProductListDTO findByRamMemory(String ramMemory, String categoryName, int skip, int limit);
+
+    ResponseProductListDTO findMostViewed();
+
+    WebScraperResponseDTO webScraperBot(WebScraperRequestDTO webScraperRequest);
 }
