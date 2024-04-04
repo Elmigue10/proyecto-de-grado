@@ -3,7 +3,10 @@ import re
 
 import pymongo
 
+## DOCKER
 client = pymongo.MongoClient("mongodb://mongo/")
+## LOCAL
+# client = pymongo.MongoClient("mongodb://localhost:27017/")
 database = client["web-scraper"]
 collection = database["products"]
 
@@ -79,14 +82,18 @@ def find_by_name(product_name, skip, limit):
     }
 
 
-def find_by_price_range(min_price, max_price, skip, limit):
-    print(f"min_price: {min_price}, max_price: {max_price}")
-    filter_query = {
+def find_by_price_range(min_price, max_price, category_name, skip, limit):
+    category_regex = re.compile(f'^{re.escape(category_name)}$', re.IGNORECASE)
+    category_query = {'categoria': {'$regex': category_regex}}
+
+    price_query = {
         "precio": {"$gte": min_price, "$lte": max_price}
     }
-    print(filter_query)
-    results = collection.find(filter_query).skip(skip).limit(limit)
-    total_items = collection.count_documents(filter_query)
+
+    query = {'$and': [price_query, category_query]}
+
+    results = collection.find(query).skip(skip).limit(limit)
+    total_items = collection.count_documents(query)
     return {
         'products': list(results),
         'total_items': total_items
@@ -154,14 +161,26 @@ def find_by_ram_memory(ram_memory, category_name, skip, limit):
     category_query = {'categoria': {'$regex': category_regex}}
 
     query_ram = {"caracteristicas":
-                                      {"$elemMatch":
-                                           {"nombre": {"$regex": "ram", "$options": "i"},
-                                            "valor": {"$regex": ram_memory}
-                                            }
-                                       }
-                                  }
+                     {"$elemMatch":
+                          {"nombre": {"$regex": "ram", "$options": "i"},
+                           "valor": {"$regex": ram_memory}
+                           }
+                      }
+                 }
 
     query = {'$and': [query_ram, category_query]}
+
+    results = collection.find(query).skip(skip).limit(limit)
+    total_items = collection.count_documents(query)
+
+    return {
+        'products': list(results),
+        'total_items': total_items
+    }
+
+
+def find_by_id_list(id_list, skip, limit):
+    query = {"_id": {"$in": id_list}}
 
     results = collection.find(query).skip(skip).limit(limit)
     total_items = collection.count_documents(query)

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Response, status
 
+from umb.v1.model.product_find_by_id_list_request import ProductFindByIdListRequestModel
 from umb.v1.model.product_find_by_id_request_model import ProductFindByIdRequestModel
 from umb.v1.model.product_find_by_name_request_model import ProductFindByNameRequestModel
 from umb.v1.model.scraper_request_model import ScraperRequest
@@ -54,8 +55,8 @@ def find_by_name(product_find_by_name_request: ProductFindByNameRequestModel):
 
 
 @api_router.get("/umb/v1/product/find-by-price-range")
-def find_by_price_range(min_price: str = '0', max_price: str = '0', skip: int = 0, limit: int = 10):
-    return product_service.find_by_price_range(min_price, max_price, skip, limit)
+def find_by_price_range(min_price: str = '0', max_price: str = '0', category_name: str = '', skip: int = 0, limit: int = 10):
+    return product_service.find_by_price_range(min_price, max_price, category_name, skip, limit)
 
 
 @api_router.get("/umb/v1/product/find-by-brand-and-category")
@@ -76,6 +77,11 @@ def find_by_brand_category_and_platform(brand_name: str = '', category_name: str
 @api_router.get("/umb/v1/product/find-by-ram-memory")
 def find_by_ram_memory(ram_memory: str = '', category_name: str = '', skip: int = 0, limit: int = 10):
     return product_service.find_by_ram_memory(ram_memory, category_name, skip, limit)
+
+
+@api_router.post("/umb/v1/product/find-by-id-list")
+def find_by_id_list(product_find_id_list_request: ProductFindByIdListRequestModel):
+    return product_service.find_by_id_list(product_find_id_list_request)
 
 
 @api_router.post("/umb/v1/product/reorganize")
