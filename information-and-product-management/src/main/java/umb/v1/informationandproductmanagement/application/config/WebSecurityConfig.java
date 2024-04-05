@@ -34,6 +34,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/auth",
                                 "/auth/refresh-token",
                                 "/user/save",
+                                "/user/forgot-password",
+                                "/user/reset-password",
                                 "/v3/api-docs",
                                 "/v3/api-docs/**",
                                 "/swagger-resources",

@@ -4,24 +4,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import umb.v1.informationandproductmanagement.business.client.ProductClient;
+import umb.v1.informationandproductmanagement.business.service.interfaces.IEmailService;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IJwtService;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IUserService;
 import umb.v1.informationandproductmanagement.domain.exception.ApiException;
 import umb.v1.informationandproductmanagement.domain.model.dto.*;
-import umb.v1.informationandproductmanagement.domain.model.entity.SearchHistoryEntity;
-import umb.v1.informationandproductmanagement.domain.model.entity.SearchResultEntity;
-import umb.v1.informationandproductmanagement.domain.model.entity.UserEntity;
-import umb.v1.informationandproductmanagement.domain.model.entity.ViewedProductEntity;
-import umb.v1.informationandproductmanagement.domain.repository.SearchHistoryRepository;
-import umb.v1.informationandproductmanagement.domain.repository.SearchResultRepository;
-import umb.v1.informationandproductmanagement.domain.repository.UserRepository;
-import umb.v1.informationandproductmanagement.domain.repository.ViewedProductRepository;
+import umb.v1.informationandproductmanagement.domain.model.entity.*;
+import umb.v1.informationandproductmanagement.domain.repository.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static umb.v1.informationandproductmanagement.domain.utility.Constant.*;
 
@@ -30,27 +24,33 @@ import static umb.v1.informationandproductmanagement.domain.utility.Constant.*;
 public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
+    private final UserWithRoleRepository userWithRoleRepository;
     private final PasswordEncoder passwordEncoder;
     private final SearchHistoryRepository searchHistoryRepository;
     private final SearchResultRepository searchResultRepository;
     private final ViewedProductRepository viewedProductRepository;
     private final IJwtService jwtService;
     private final ProductClient productClient;
+    private final IEmailService emailService;
 
     public UserServiceImpl(UserRepository userRepository,
+                           UserWithRoleRepository userWithRoleRepository,
                            PasswordEncoder passwordEncoder,
                            SearchHistoryRepository searchHistoryRepository,
                            SearchResultRepository searchResultRepository,
                            ViewedProductRepository viewedProductRepository,
                            IJwtService jwtService,
-                           ProductClient productClient) {
+                           ProductClient productClient,
+                           IEmailService emailService) {
         this.userRepository = userRepository;
+        this.userWithRoleRepository = userWithRoleRepository;
         this.passwordEncoder = passwordEncoder;
         this.searchHistoryRepository = searchHistoryRepository;
         this.searchResultRepository = searchResultRepository;
         this.viewedProductRepository = viewedProductRepository;
         this.jwtService = jwtService;
         this.productClient = productClient;
+        this.emailService = emailService;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public SearchHistoryResponseDTO searchHistory(Map<String, String> requestHeaders) {
-        UserEntity user = findUserByJwtTokenClaims(requestHeaders);
+        UserWithRoleEntity user = findUserByJwtTokenClaims(requestHeaders);
         List<SearchHistoryEntity> searches = searchHistoryRepository.findByUsuarioId(user.getId());
 
         List<SearchHistoryDTO> searchHistory = new ArrayList<>();
@@ -106,7 +106,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ResponseProductListDTO viewedProducts(Map<String, String> requestHeaders) {
-        UserEntity user = findUserByJwtTokenClaims(requestHeaders);
+        UserWithRoleEntity user = findUserByJwtTokenClaims(requestHeaders);
         List<ViewedProductEntity> viewedProducts = viewedProductRepository.findByUsuarioId(user.getId());
 
         List<String> productIdList = viewedProducts.stream()
@@ -120,11 +120,43 @@ public class UserServiceImpl implements IUserService {
                 .build());
     }
 
-    private UserEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders){
+    @Override
+    public ResponseProductDTO forgotPassword(String correoElectronico) {
+        UserWithRoleEntity user = findUserByEmail(correoElectronico);
+
+        String token = jwtService.generateToken(user);
+
+        String link = "http://localhost:3000/reset-password?token=" + token;
+
+        String content = "<p>Hola,</p>"
+                + "<p>Has solicitado restablecer tu contraseña.</p>"
+                + "<p>Dirigete al siguiente enlace para cambiar tu contraseña:</p>"
+                + "<p><a href=\"" + link + "\">Cambiar contraseña</a></p>"
+                + "<br>"
+                + "<p>Ignora este correo si recuerdas tu contraseña o no fuiste quien realizo esta solicitud.</p>";
+
+        emailService.sendMail(correoElectronico, RESTORE_PASSWORD_REQUEST, content);
+
+        return ResponseProductDTO.builder()
+                .message(OK)
+                .status(200)
+                .build();
+    }
+
+    @Override
+    public ResponseProductDTO resetPassword(ResetPasswordRequestDTO resetPasswordRequest) {
+        return null;
+    }
+
+    private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders){
         String authorizationHeader = requestHeaders.get(AUTHORIZATION_HEADER);
         String token = authorizationHeader.substring(6);
         String email = jwtService.extractUsername(token);
-        return userRepository.findByCorreoElectronico(email)
+        return findUserByEmail(email);
+    }
+
+    private UserWithRoleEntity findUserByEmail(String email) {
+        return userWithRoleRepository.findByCorreoElectronico(email)
                 .orElseThrow(() -> new ApiException("Usuario no econtrado: " + email, 404));
     }
 

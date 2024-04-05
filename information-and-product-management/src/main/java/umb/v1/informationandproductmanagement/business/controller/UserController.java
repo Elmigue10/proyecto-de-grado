@@ -6,10 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IUserService;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductListDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.SearchHistoryResponseDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.UserDTO;
-import umb.v1.informationandproductmanagement.domain.model.dto.ResponseProductDTO;
+import umb.v1.informationandproductmanagement.domain.model.dto.*;
 
 import java.util.Map;
 
@@ -51,5 +48,24 @@ public class UserController {
         return new ResponseEntity<>(responseProducts, HttpStatus.OK);
     }
 
+    @PostMapping("/forgot-password")
+    public ResponseEntity<ResponseProductDTO> forgotPassword(@RequestParam("correoElectronico") String correoElectronico){
+        log.info("arrive request for forgot-password: {}", correoElectronico);
+
+        ResponseProductDTO response = userService.forgotPassword(correoElectronico);
+
+        log.info("forgot-pasword response: {}", response);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<ResponseProductDTO> resetPassword(@RequestBody ResetPasswordRequestDTO resetPasswordRequest){
+        log.info("arrive request for reset-password: {}", resetPasswordRequest);
+
+        ResponseProductDTO response = userService.resetPassword(resetPasswordRequest);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }
