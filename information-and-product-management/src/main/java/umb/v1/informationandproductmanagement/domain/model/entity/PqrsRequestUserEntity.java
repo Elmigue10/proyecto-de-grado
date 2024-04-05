@@ -1,9 +1,13 @@
 package umb.v1.informationandproductmanagement.domain.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
+@Builder
 @Getter
+@Setter
 @Entity
 @Table(name = "solicitud_pqrs_usuario")
 public class PqrsRequestUserEntity {
@@ -19,4 +23,12 @@ public class PqrsRequestUserEntity {
     @Column(name = "solicitud_pqrs_id")
     private Long solicitudPqrsId;
 
+    public PqrsRequestUserEntity(Long id, Long usuarioId, Long solicitudPqrsId) {
+        this.id = id;
+        this.usuarioId = usuarioId;
+        this.solicitudPqrsId = solicitudPqrsId;
+    }
+
+    public PqrsRequestUserEntity() {
+    }
 }

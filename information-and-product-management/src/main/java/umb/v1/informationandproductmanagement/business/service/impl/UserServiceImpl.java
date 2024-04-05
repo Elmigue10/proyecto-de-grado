@@ -1,11 +1,14 @@
 package umb.v1.informationandproductmanagement.business.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import umb.v1.informationandproductmanagement.business.client.ProductClient;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IEmailService;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IJwtService;
+import umb.v1.informationandproductmanagement.business.service.interfaces.IPqrsRequestService;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IUserService;
 import umb.v1.informationandproductmanagement.domain.exception.ApiException;
 import umb.v1.informationandproductmanagement.domain.model.dto.*;
@@ -13,9 +16,7 @@ import umb.v1.informationandproductmanagement.domain.model.entity.*;
 import umb.v1.informationandproductmanagement.domain.repository.*;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static umb.v1.informationandproductmanagement.domain.utility.Constant.*;
 
@@ -32,6 +33,9 @@ public class UserServiceImpl implements IUserService {
     private final IJwtService jwtService;
     private final ProductClient productClient;
     private final IEmailService emailService;
+    private final IPqrsRequestService pqrsRequestService;
+    private final UserDetailsService userDetailsService;
+
 
     public UserServiceImpl(UserRepository userRepository,
                            UserWithRoleRepository userWithRoleRepository,
@@ -41,7 +45,9 @@ public class UserServiceImpl implements IUserService {
                            ViewedProductRepository viewedProductRepository,
                            IJwtService jwtService,
                            ProductClient productClient,
-                           IEmailService emailService) {
+                           IEmailService emailService,
+                           IPqrsRequestService pqrsRequestService,
+                           UserDetailsService userDetailsService) {
         this.userRepository = userRepository;
         this.userWithRoleRepository = userWithRoleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -51,6 +57,8 @@ public class UserServiceImpl implements IUserService {
         this.jwtService = jwtService;
         this.productClient = productClient;
         this.emailService = emailService;
+        this.pqrsRequestService = pqrsRequestService;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -137,6 +145,19 @@ public class UserServiceImpl implements IUserService {
 
         emailService.sendMail(correoElectronico, RESTORE_PASSWORD_REQUEST, content);
 
+        pqrsRequestService.savePqrsRequestEntity(PqrsRequestEntity.builder()
+                        .descripcionSolicitud(CAMBIO_CONTRAENA)
+                        .fechaRegistro(new Timestamp(System.currentTimeMillis()))
+                        .tipoSolicitudPqrsId(1L)
+                        .incidenciaId(2L)
+                        .build(),
+                PqrsRequestUserEntity.builder()
+                        .usuarioId(user.getId())
+                        .build(),
+                PqrsRequestUserEntity.builder()
+                        .usuarioId(1L)
+                        .build());
+
         return ResponseProductDTO.builder()
                 .message(OK)
                 .status(200)
@@ -145,7 +166,41 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public ResponseProductDTO resetPassword(ResetPasswordRequestDTO resetPasswordRequest) {
-        return null;
+
+        String correoElectronicoFromToken = jwtService.extractUsername(resetPasswordRequest.getToken());
+        if (!Objects.equals(correoElectronicoFromToken, resetPasswordRequest.getCorreoElectronico())){
+            throw new ApiException("Correo electronico invalido", 400);
+        }
+
+        if (!Objects.equals(resetPasswordRequest.getContrasena(), resetPasswordRequest.getConfirmContrasena())){
+            throw new ApiException("Las contraseñas no coinciden", 400);
+        }
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(resetPasswordRequest.getCorreoElectronico());
+
+        if (!jwtService.isTokenValid(resetPasswordRequest.getToken(), userDetails)) {
+            throw new ApiException("El token no es valido", 400);
+        }
+
+        Optional<UserEntity> optionalUser =
+                userRepository.findByCorreoElectronico(resetPasswordRequest.getCorreoElectronico());
+
+        if (optionalUser.isPresent()){
+            UserEntity user = optionalUser.get();
+
+            user.setContrasena(passwordEncoder.encode(resetPasswordRequest.getContrasena()));
+
+            userRepository.save(user);
+
+            pqrsRequestService.updatePqrsRequestUpdatePassword(user.getId(), CAMBIO_CONTRAENA);
+        } else {
+            throw new ApiException("Usuario no encontrado", 404);
+        }
+
+        return ResponseProductDTO.builder()
+                .message(OK)
+                .status(200)
+                .build();
     }
 
     private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders){

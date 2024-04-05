@@ -21,5 +21,6 @@ public class Constant {
     public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
     public static final String AUTHORIZATION_HEADER = "authorization";
     public static final String RESTORE_PASSWORD_REQUEST = "Solicitud para restablecer tu contraseña";
+    public static final String CAMBIO_CONTRAENA = "Solicitud para cambio de contraseña";
 
 }

@@ -3,11 +3,13 @@ package umb.v1.informationandproductmanagement.domain.model.entity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Builder
 @Getter
+@Setter
 @Entity
 @Table(name = "usuario")
 public class UserEntity {
