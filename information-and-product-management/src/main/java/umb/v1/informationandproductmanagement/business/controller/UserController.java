@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ResponseProductDTO> save(@RequestBody UserDTO user){
+    public ResponseEntity<ResponseProductDTO> save(@RequestBody UserDTO user) {
         log.info("arrived request for save...");
 
         ResponseProductDTO response = userService.save(user);
@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping("/search-history")
-    public ResponseEntity<SearchHistoryResponseDTO> searchHistory(@RequestHeader Map<String, String> requestHeaders){
+    public ResponseEntity<SearchHistoryResponseDTO> searchHistory(@RequestHeader Map<String, String> requestHeaders) {
         log.info("arrived request for search-history");
 
         SearchHistoryResponseDTO searchHistoryResponse = userService.searchHistory(requestHeaders);
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @GetMapping("/viewed-products")
-    public ResponseEntity<ResponseProductListDTO> viewedProducts(@RequestHeader Map<String, String> requestHeaders){
+    public ResponseEntity<ResponseProductListDTO> viewedProducts(@RequestHeader Map<String, String> requestHeaders) {
         log.info("arrived request for viewed-products");
 
         ResponseProductListDTO responseProducts = userService.viewedProducts(requestHeaders);
@@ -49,8 +49,8 @@ public class UserController {
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<ResponseProductDTO> forgotPassword(@RequestParam("correoElectronico") String correoElectronico){
-        log.info("arrive request for forgot-password: {}", correoElectronico);
+    public ResponseEntity<ResponseProductDTO> forgotPassword(@RequestParam("correoElectronico") String correoElectronico) {
+        log.info("arrived request for forgot-password: {}", correoElectronico);
 
         ResponseProductDTO response = userService.forgotPassword(correoElectronico);
 
@@ -60,10 +60,37 @@ public class UserController {
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<ResponseProductDTO> resetPassword(@RequestBody ResetPasswordRequestDTO resetPasswordRequest){
-        log.info("arrive request for reset-password: {}", resetPasswordRequest);
+    public ResponseEntity<ResponseProductDTO> resetPassword(@RequestBody ResetPasswordRequestDTO resetPasswordRequest) {
+        log.info("arrived request for reset-password: {}", resetPasswordRequest);
 
         ResponseProductDTO response = userService.resetPassword(resetPasswordRequest);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/find-by-email")
+    public ResponseEntity<ResponseUserDTO> findByEmail(@RequestParam(name = "correoElectronico") String correoElectronico) {
+        log.info("arrived request for find-by-email: {}", correoElectronico);
+
+        ResponseUserDTO response = userService.findByEmail(correoElectronico);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseUserDTO> update(@RequestBody UserDTO userDTO) {
+        log.info("arrived request for update: {}", userDTO.getCorreoElectronico());
+
+        ResponseUserDTO response = userService.update(userDTO);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/update-password")
+    public ResponseEntity<ResponseUserDTO> updatePassword(@RequestBody UpdatePasswordRequestDTO updatePasswordRequest) {
+        log.info("arrived request for update: {}", updatePasswordRequest.getCorreoElectronico());
+
+        ResponseUserDTO response = userService.updatePassword(updatePasswordRequest);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

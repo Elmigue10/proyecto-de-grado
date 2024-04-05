@@ -14,6 +14,6 @@ public class IncidenceEntity {
     private Long id;
 
     @Column(name = "tipo_incidencia")
-    private String tipo_incidencia;
+    private String tipoIncidencia;
 
 }

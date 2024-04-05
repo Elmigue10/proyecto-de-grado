@@ -210,6 +210,86 @@ public class UserServiceImpl implements IUserService {
                 .build();
     }
 
+    @Override
+    public ResponseUserDTO findByEmail(String correoElectronico) {
+        Optional<UserEntity> optionalUserEntity = userRepository.findByCorreoElectronico(correoElectronico);
+
+        if (optionalUserEntity.isPresent()) {
+            UserEntity userEntity = optionalUserEntity.get();
+            return ResponseUserDTO.builder()
+                    .message(OK)
+                    .status(200)
+                    .user(UserDTO.builder()
+                            .id(userEntity.getId())
+                            .nombreCompleto(userEntity.getNombreCompleto())
+                            .correoElectronico(userEntity.getCorreoElectronico())
+                            .fechaRegistro(userEntity.getFechaRegistro().toString())
+                            .fechaActualiza(userEntity.getFechaActualiza().toString())
+                            .build())
+                    .build();
+        } else {
+            throw new ApiException("Usuario no encontrado", 404);
+        }
+    }
+
+    @Override
+    public ResponseUserDTO update(UserDTO user) {
+
+        if (user.getId() == null || user.getId() == 0) {
+            throw new ApiException("El campo 'id' es requerido", 400);
+        }
+
+        Optional<UserEntity> optionalUserEntity = userRepository.findById(user.getId());
+
+        if (optionalUserEntity.isPresent()) {
+            UserEntity userEntity = optionalUserEntity.get();
+
+            userEntity.setNombreCompleto(user.getNombreCompleto());
+            userEntity.setContrasena(user.getCorreoElectronico());
+            userEntity.setFechaActualiza(new Timestamp(System.currentTimeMillis()));
+
+            userRepository.save(userEntity);
+
+            return ResponseUserDTO.builder()
+                    .message(OK)
+                    .status(200)
+                    .user(user)
+                    .build();
+        } else {
+            throw new ApiException("Usuario no encontrado", 404);
+        }
+    }
+
+    @Override
+    public ResponseUserDTO updatePassword(UpdatePasswordRequestDTO updatePasswordRequest) {
+        if (!Objects.equals(updatePasswordRequest.getNewPassword(), updatePasswordRequest.getConfirmNewPassword())) {
+            throw new ApiException("Las contraseñas no coinciden", 400);
+        }
+
+        Optional<UserEntity> optionalUserEntity =
+                userRepository.findByCorreoElectronico(updatePasswordRequest.getCorreoElectronico());
+
+        if (optionalUserEntity.isPresent()) {
+            UserEntity userEntity = optionalUserEntity.get();
+
+            if (!Objects.equals(passwordEncoder.encode(updatePasswordRequest.getOldPassword()),
+                    userEntity.getContrasena())) {
+                throw new ApiException(BAD_CREDENTIALS, 400);
+            }
+
+            userEntity.setContrasena(updatePasswordRequest.getNewPassword());
+
+            userRepository.save(userEntity);
+
+            return ResponseUserDTO.builder()
+                    .message(OK)
+                    .status(200)
+                    .build();
+        } else {
+            throw new ApiException("Usuario no encontrado", 404);
+        }
+    }
+
     private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders) {
         String authorizationHeader = requestHeaders.get(AUTHORIZATION_HEADER);
         String token = authorizationHeader.substring(6);

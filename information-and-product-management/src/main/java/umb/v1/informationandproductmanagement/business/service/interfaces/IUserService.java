@@ -14,4 +14,10 @@ public interface IUserService {
     ResponseProductDTO forgotPassword(String correoElectronico);
 
     ResponseProductDTO resetPassword(ResetPasswordRequestDTO resetPasswordRequest);
+
+    ResponseUserDTO findByEmail(String correoElectronico);
+
+    ResponseUserDTO update(UserDTO userDTO);
+
+    ResponseUserDTO updatePassword(UpdatePasswordRequestDTO updatePasswordRequest);
 }
