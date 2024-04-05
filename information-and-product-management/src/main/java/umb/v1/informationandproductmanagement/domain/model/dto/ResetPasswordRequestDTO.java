@@ -20,4 +20,7 @@ public class ResetPasswordRequestDTO {
     @JsonProperty("token")
     private String token;
 
+    @JsonProperty("pqrsId")
+    private Long pqrsId;
+
 }

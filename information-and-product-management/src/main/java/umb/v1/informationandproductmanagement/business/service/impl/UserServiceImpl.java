@@ -64,11 +64,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ResponseProductDTO save(UserDTO user) {
         userRepository.save(UserEntity.builder()
-                        .nombreCompleto(user.getNombreCompleto())
-                        .correoElectronico(user.getCorreoElectronico())
-                        .contrasena(passwordEncoder.encode(user.getContrasena()))
-                        .fechaRegistro(new Timestamp(System.currentTimeMillis()))
-                        .rolId(CUSTOMER_ROLE_ID)
+                .nombreCompleto(user.getNombreCompleto())
+                .correoElectronico(user.getCorreoElectronico())
+                .contrasena(passwordEncoder.encode(user.getContrasena()))
+                .fechaRegistro(new Timestamp(System.currentTimeMillis()))
+                .rolId(CUSTOMER_ROLE_ID)
                 .build());
         return ResponseProductDTO.builder()
                 .message(OK)
@@ -82,7 +82,7 @@ public class UserServiceImpl implements IUserService {
         List<SearchHistoryEntity> searches = searchHistoryRepository.findByUsuarioId(user.getId());
 
         List<SearchHistoryDTO> searchHistory = new ArrayList<>();
-        searches.forEach( search -> {
+        searches.forEach(search -> {
 
             List<SearchResultEntity> searchResults =
                     searchResultRepository.findByHistorialBusquedaId(search.getId());
@@ -92,16 +92,16 @@ public class UserServiceImpl implements IUserService {
                     .toList();
 
             ResponseProductListDTO responseProducts = productClient.findByIdList(RequestFindByIdListDTO.builder()
-                            .idList(productIdList)
-                            .skip(0)
-                            .limit(productIdList.size())
+                    .idList(productIdList)
+                    .skip(0)
+                    .limit(productIdList.size())
                     .build());
 
             searchHistory.add(SearchHistoryDTO.builder()
-                            .id(search.getId())
-                            .busqueda(search.getBusqueda())
-                            .fecha(search.getFecha())
-                            .productos(responseProducts.getProducts())
+                    .id(search.getId())
+                    .busqueda(search.getBusqueda())
+                    .fecha(search.getFecha())
+                    .productos(responseProducts.getProducts())
                     .build());
         });
 
@@ -132,20 +132,7 @@ public class UserServiceImpl implements IUserService {
     public ResponseProductDTO forgotPassword(String correoElectronico) {
         UserWithRoleEntity user = findUserByEmail(correoElectronico);
 
-        String token = jwtService.generateToken(user);
-
-        String link = "http://localhost:3000/reset-password?token=" + token;
-
-        String content = "<p>Hola,</p>"
-                + "<p>Has solicitado restablecer tu contraseña.</p>"
-                + "<p>Dirigete al siguiente enlace para cambiar tu contraseña:</p>"
-                + "<p><a href=\"" + link + "\">Cambiar contraseña</a></p>"
-                + "<br>"
-                + "<p>Ignora este correo si recuerdas tu contraseña o no fuiste quien realizo esta solicitud.</p>";
-
-        emailService.sendMail(correoElectronico, RESTORE_PASSWORD_REQUEST, content);
-
-        pqrsRequestService.savePqrsRequestEntity(PqrsRequestEntity.builder()
+        PqrsRequestEntity pqrsRequest = pqrsRequestService.savePqrsRequestEntity(PqrsRequestEntity.builder()
                         .descripcionSolicitud(CAMBIO_CONTRAENA)
                         .fechaRegistro(new Timestamp(System.currentTimeMillis()))
                         .tipoSolicitudPqrsId(1L)
@@ -158,21 +145,41 @@ public class UserServiceImpl implements IUserService {
                         .usuarioId(1L)
                         .build());
 
+        String token = jwtService.generateToken(user);
+
+        String content = buildContent(token, pqrsRequest);
+
+        emailService.sendMail(correoElectronico, RESTORE_PASSWORD_REQUEST, content);
+
         return ResponseProductDTO.builder()
                 .message(OK)
                 .status(200)
                 .build();
     }
 
+    private static String buildContent(String token, PqrsRequestEntity pqrsRequest) {
+        String link = "http://localhost:3000/reset-password?token=" +
+                token +
+                "&pqrsId=" +
+                pqrsRequest.getId();
+
+        return "<p>Hola,</p>"
+                + "<p>Has solicitado restablecer tu contraseña.</p>"
+                + "<p>Dirigete al siguiente enlace para cambiar tu contraseña:</p>"
+                + "<p><a href=\"" + link + "\">Cambiar contraseña</a></p>"
+                + "<br>"
+                + "<p>Ignora este correo si recuerdas tu contraseña o no fuiste quien realizo esta solicitud.</p>";
+    }
+
     @Override
     public ResponseProductDTO resetPassword(ResetPasswordRequestDTO resetPasswordRequest) {
 
         String correoElectronicoFromToken = jwtService.extractUsername(resetPasswordRequest.getToken());
-        if (!Objects.equals(correoElectronicoFromToken, resetPasswordRequest.getCorreoElectronico())){
+        if (!Objects.equals(correoElectronicoFromToken, resetPasswordRequest.getCorreoElectronico())) {
             throw new ApiException("Correo electronico invalido", 400);
         }
 
-        if (!Objects.equals(resetPasswordRequest.getContrasena(), resetPasswordRequest.getConfirmContrasena())){
+        if (!Objects.equals(resetPasswordRequest.getContrasena(), resetPasswordRequest.getConfirmContrasena())) {
             throw new ApiException("Las contraseñas no coinciden", 400);
         }
 
@@ -185,14 +192,14 @@ public class UserServiceImpl implements IUserService {
         Optional<UserEntity> optionalUser =
                 userRepository.findByCorreoElectronico(resetPasswordRequest.getCorreoElectronico());
 
-        if (optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             UserEntity user = optionalUser.get();
 
             user.setContrasena(passwordEncoder.encode(resetPasswordRequest.getContrasena()));
 
             userRepository.save(user);
 
-            pqrsRequestService.updatePqrsRequestUpdatePassword(user.getId(), CAMBIO_CONTRAENA);
+            pqrsRequestService.updatePqrsRequestUpdatePassword(resetPasswordRequest.getPqrsId());
         } else {
             throw new ApiException("Usuario no encontrado", 404);
         }
@@ -203,7 +210,7 @@ public class UserServiceImpl implements IUserService {
                 .build();
     }
 
-    private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders){
+    private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders) {
         String authorizationHeader = requestHeaders.get(AUTHORIZATION_HEADER);
         String token = authorizationHeader.substring(6);
         String email = jwtService.extractUsername(token);

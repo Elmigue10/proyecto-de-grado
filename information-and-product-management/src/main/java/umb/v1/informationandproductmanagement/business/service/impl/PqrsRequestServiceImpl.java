@@ -26,21 +26,22 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
     }
 
     @Override
-    public void savePqrsRequestEntity(PqrsRequestEntity pqrsRequest,
-                                      PqrsRequestUserEntity pqrsRequestUserForUser,
-                                      PqrsRequestUserEntity pqrsRequestUserForAdmin) {
+    public PqrsRequestEntity savePqrsRequestEntity(PqrsRequestEntity pqrsRequest,
+                                                   PqrsRequestUserEntity pqrsRequestUserForUser,
+                                                   PqrsRequestUserEntity pqrsRequestUserForAdmin) {
         PqrsRequestEntity pqrsRequestSaved = pqrsRequestRepository.save(pqrsRequest);
 
         pqrsRequestUserForUser.setSolicitudPqrsId(pqrsRequestSaved.getId());
         pqrsRequestUserForAdmin.setSolicitudPqrsId(pqrsRequestSaved.getId());
         pqrsRequestUserRepository.save(pqrsRequestUserForUser);
         pqrsRequestUserRepository.save(pqrsRequestUserForAdmin);
+
+        return pqrsRequestSaved;
     }
 
     @Override
-    public void updatePqrsRequestUpdatePassword(Long id, String cambioContraena) {
-        Optional<PqrsRequestEntity> optionalPqrsRequest =
-                pqrsRequestRepository.findByUserIdAndDescription(cambioContraena, id);
+    public void updatePqrsRequestUpdatePassword(Long pqrsId) {
+        Optional<PqrsRequestEntity> optionalPqrsRequest = pqrsRequestRepository.findById(pqrsId);
 
         if (optionalPqrsRequest.isPresent()) {
             PqrsRequestEntity pqrsRequest = optionalPqrsRequest.get();

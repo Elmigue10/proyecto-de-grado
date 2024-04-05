@@ -5,9 +5,9 @@ import umb.v1.informationandproductmanagement.domain.model.entity.PqrsRequestUse
 
 public interface IPqrsRequestService {
 
-    void savePqrsRequestEntity(PqrsRequestEntity pqrsRequest,
+    PqrsRequestEntity savePqrsRequestEntity(PqrsRequestEntity pqrsRequest,
                                             PqrsRequestUserEntity pqrsRequestUserForUser,
                                             PqrsRequestUserEntity pqrsRequestUserForAdmin);
 
-    void updatePqrsRequestUpdatePassword(Long id, String cambioContraena);
+    void updatePqrsRequestUpdatePassword(Long pqrsId);
 }
