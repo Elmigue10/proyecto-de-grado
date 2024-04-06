@@ -61,7 +61,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/user/update-password").hasRole(CLIENTE)
                         .requestMatchers("/pqrs/find-by-email").hasRole(CLIENTE)
                         .requestMatchers("/product/web-scraper-bot").hasRole(ADMIN)
-                        .requestMatchers("/product/find-all").hasRole(ADMIN)
+                        .requestMatchers("/pqrs/find-all").hasRole(ADMIN)
                         .requestMatchers("/pqrs/save").hasRole(ADMIN)
                         .requestMatchers("/pqrs/update").hasRole(ADMIN)
                         .anyRequest()

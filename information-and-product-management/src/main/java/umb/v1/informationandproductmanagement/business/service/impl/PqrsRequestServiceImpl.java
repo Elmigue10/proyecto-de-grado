@@ -62,6 +62,7 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
 
             pqrsRequest.setFechaActualiza(new Timestamp(System.currentTimeMillis()));
             pqrsRequest.setIncidenciaId(4L);
+            pqrsRequestRepository.save(pqrsRequest);
         } else {
             throw new ApiException("Solicitud PQRS no encontrada", 404);
         }
@@ -80,7 +81,8 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
 
             List<UserWithRoleEntity> userWithRoleEntities = new ArrayList<>();
             pqrsRequestUserEntities.forEach(pqrsRequestUser -> userWithRoleEntities
-                    .add(userWithRoleRepository.findById(pqrsRequestUser.getId()).orElse(null)));
+                    .add(userWithRoleRepository.findById(pqrsRequestUser.getUsuarioId())
+                            .orElse(null)));
 
             String email = "";
 
@@ -103,7 +105,9 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
                     .id(request.getId())
                     .descripcionSolicitud(request.getDescripcionSolicitud())
                     .fechaRegistro(request.getFechaRegistro().toString())
-                    .fechaActualiza(request.getFechaActualiza().toString())
+                    .fechaActualiza(request.getFechaActualiza() == null ?
+                            null :
+                            request.getFechaActualiza().toString())
                     .correoElectronico(email)
                     .incidencia(incidence.getTipoIncidencia())
                     .tipoSolicitud(pqrsRequestType.getTipoSolicitud())
@@ -178,7 +182,9 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
                     .id(pqrsRequest.getId())
                     .correoElectronico(user.getCorreoElectronico())
                     .fechaRegistro(pqrsRequest.getFechaRegistro().toString())
-                    .fechaActualiza(pqrsRequest.getFechaActualiza().toString())
+                    .fechaActualiza(pqrsRequest.getFechaActualiza() == null ?
+                            null :
+                            pqrsRequest.getFechaActualiza().toString())
                     .incidencia(incidence.getTipoIncidencia())
                     .tipoSolicitud(pqrsRequestType.getTipoSolicitud())
                     .build());

@@ -35,6 +35,7 @@ public class UserServiceImpl implements IUserService {
     private final IEmailService emailService;
     private final IPqrsRequestService pqrsRequestService;
     private final UserDetailsService userDetailsService;
+    private final AuthServiceImpl authService;
 
 
     public UserServiceImpl(UserRepository userRepository,
@@ -47,7 +48,8 @@ public class UserServiceImpl implements IUserService {
                            ProductClient productClient,
                            IEmailService emailService,
                            IPqrsRequestService pqrsRequestService,
-                           UserDetailsService userDetailsService) {
+                           UserDetailsService userDetailsService,
+                           AuthServiceImpl authService) {
         this.userRepository = userRepository;
         this.userWithRoleRepository = userWithRoleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -59,6 +61,7 @@ public class UserServiceImpl implements IUserService {
         this.emailService = emailService;
         this.pqrsRequestService = pqrsRequestService;
         this.userDetailsService = userDetailsService;
+        this.authService = authService;
     }
 
     @Override
@@ -224,7 +227,9 @@ public class UserServiceImpl implements IUserService {
                             .nombreCompleto(userEntity.getNombreCompleto())
                             .correoElectronico(userEntity.getCorreoElectronico())
                             .fechaRegistro(userEntity.getFechaRegistro().toString())
-                            .fechaActualiza(userEntity.getFechaActualiza().toString())
+                            .fechaActualiza(userEntity.getFechaActualiza() == null ?
+                                    null :
+                                    userEntity.getFechaActualiza().toString())
                             .build())
                     .build();
         } else {
@@ -245,7 +250,7 @@ public class UserServiceImpl implements IUserService {
             UserEntity userEntity = optionalUserEntity.get();
 
             userEntity.setNombreCompleto(user.getNombreCompleto());
-            userEntity.setContrasena(user.getCorreoElectronico());
+            userEntity.setCorreoElectronico(user.getCorreoElectronico());
             userEntity.setFechaActualiza(new Timestamp(System.currentTimeMillis()));
 
             userRepository.save(userEntity);
@@ -272,12 +277,12 @@ public class UserServiceImpl implements IUserService {
         if (optionalUserEntity.isPresent()) {
             UserEntity userEntity = optionalUserEntity.get();
 
-            if (!Objects.equals(passwordEncoder.encode(updatePasswordRequest.getOldPassword()),
-                    userEntity.getContrasena())) {
-                throw new ApiException(BAD_CREDENTIALS, 400);
-            }
+            authService.auth(AuthRequestDTO.builder()
+                            .mail(updatePasswordRequest.getCorreoElectronico())
+                            .password(updatePasswordRequest.getOldPassword())
+                    .build());
 
-            userEntity.setContrasena(updatePasswordRequest.getNewPassword());
+            userEntity.setContrasena(passwordEncoder.encode(updatePasswordRequest.getNewPassword()));
 
             userRepository.save(userEntity);
 
