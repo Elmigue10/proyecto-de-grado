@@ -572,7 +572,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombreCompleto\": \"Miguel Valbuena\",\r\n    \"correoElectronico\": \"miguel@email.com\",\r\n    \"contrasena\": \"cualclave123\"\r\n}",
+							"raw": "{\r\n    \"nombreCompleto\": \"Miguel Valbuena\",\r\n    \"correoElectronico\": \"migued77@gmail.com\",\r\n    \"contrasena\": \"cualclave123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -603,7 +603,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"correoElectronico\": \"miguel@email.com\",\r\n    \"contrasena\": \"cualclave123\"\r\n}",
+							"raw": "{\r\n    \"correoElectronico\": \"migued77@gmail.com\",\r\n    \"contrasena\": \"cualclave123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -689,6 +689,223 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/user/forgot-password?correoElectronico=migued77@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"user",
+								"forgot-password"
+							],
+							"query": [
+								{
+									"key": "correoElectronico",
+									"value": "migued77@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correoElectronico\": \"migued77@gmail.com\",\r\n    \"contrasena\": \"contraseña123\",\r\n    \"confirmContrasena\": \"contraseña123\",\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEyMzU5MjQ1LCJleHAiOjE3MTI0NDU2NDV9.58VZBDd6d5lSZ8CfByLShWx3HlkVCa2xqEgEO8UF72c\",\r\n    \"pqrsId\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/user/reset-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"user",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEyMzU5NDMxLCJleHAiOjE3MTI0NDU4MzF9.PatqQRsr3xSbF9K61_CzIUo5grzOn3oaYSOFM4OGtJE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/user/find-by-email?correoElectronico=migued77@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"user",
+								"find-by-email"
+							],
+							"query": [
+								{
+									"key": "correoElectronico",
+									"value": "migued77@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEyMzU5NDMxLCJleHAiOjE3MTI0NDU4MzF9.PatqQRsr3xSbF9K61_CzIUo5grzOn3oaYSOFM4OGtJE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"nombreCompleto\": \"Miguel Angel Valbuena Olaya\",\r\n    \"correoElectronico\": \"migued77@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/user/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEyMzU5NDMxLCJleHAiOjE3MTI0NDU4MzF9.PatqQRsr3xSbF9K61_CzIUo5grzOn3oaYSOFM4OGtJE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correoElectronico\": \"migued77@gmail.com\",\r\n    \"oldPassword\": \"cualclave123\",\r\n    \"newPassword\": \"contraseña123\",\r\n    \"confirmNewPassword\": \"contraseña123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/user/update-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"user",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pqrs-find-by-email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEyMzYwOTAzLCJleHAiOjE3MTI0NDczMDN9.9zVqfOdYpFPFAYIv1hTNTbz8GKACH8o3YzZaCeI-vbk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/pqrs/find-by-email?correoElectronico=migued77@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"pqrs",
+								"find-by-email"
+							],
+							"query": [
+								{
+									"key": "correoElectronico",
+									"value": "migued77@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -761,6 +978,120 @@
 								"v1",
 								"product",
 								"web-scraper-bot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pqrs-find-all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyMzYxMjU3LCJleHAiOjE3MTI0NDc2NTd9.Wyf4rsDAqIQG6TP3MLDzIYTzCxDNFez5NpbVxS0SxPs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/pqrs/find-all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"pqrs",
+								"find-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pqrs-save",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyMzYxMjU3LCJleHAiOjE3MTI0NDc2NTd9.Wyf4rsDAqIQG6TP3MLDzIYTzCxDNFez5NpbVxS0SxPs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcionSolicitud\": \"No me gusta la pagina\",\r\n    \"correoElectronico\": \"migued77@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/pqrs/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"pqrs",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pqrs-update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyMzYxMjU3LCJleHAiOjE3MTI0NDc2NTd9.Wyf4rsDAqIQG6TP3MLDzIYTzCxDNFez5NpbVxS0SxPs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/pqrs/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"pqrs",
+								"update"
 							]
 						}
 					},
