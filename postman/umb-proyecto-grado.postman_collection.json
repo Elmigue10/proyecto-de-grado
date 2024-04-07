@@ -1000,7 +1000,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"ktronixPhones\": true,\r\n    \"falabellaPhones\": true,\r\n    \"exitoPhones\": true,\r\n    \"mercadoLibrePhones\": true,\r\n    \"ktronixComputers\": true,\r\n    \"falabellaComputers\": true,\r\n    \"exitoComputers\": true,\r\n    \"mercadoLibreComputers\": true\r\n}",
+							"raw": "{\r\n  \"ktronixPhones\": true,\r\n  \"falabellaPhones\": true,\r\n  \"exitoPhones\": true,\r\n  \"mercadoLibrePhones\": true,\r\n  \"ktronixComputers\": true,\r\n  \"falabellaComputers\": true,\r\n  \"exitoComputers\": true,\r\n  \"mercadoLibreComputers\": true,\r\n  \"ktronixMonitors\": true,\r\n  \"falabellaMonitors\": true,\r\n  \"exitoMonitors\": true,\r\n  \"mercadoLibreMonitors\": true,\r\n  \"ktronixTablets\": true,\r\n  \"falabellaTablets\": true,\r\n  \"exitoTablets\": true,\r\n  \"mercadoLibreTablets\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
