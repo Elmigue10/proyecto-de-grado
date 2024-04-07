@@ -32,4 +32,28 @@ public class WebScraperRequestDTO {
     @JsonProperty("mercadoLibreComputers")
     private boolean mercadoLibreComputers;
 
+    @JsonProperty("ktronixMonitors")
+    private boolean ktronixMonitors;
+
+    @JsonProperty("falabellaMonitors")
+    private boolean falabellaMonitors;
+
+    @JsonProperty("exitoMonitors")
+    private boolean exitoMonitors;
+
+    @JsonProperty("mercadoLibreMonitors")
+    private boolean mercadoLibreMonitors;
+
+    @JsonProperty("ktronixTablets")
+    private boolean ktronixTablets;
+
+    @JsonProperty("falabellaTablets")
+    private boolean falabellaTablets;
+
+    @JsonProperty("exitoTablets")
+    private boolean exitoTablets;
+
+    @JsonProperty("mercadoLibreTablets")
+    private boolean mercadoLibreTablets;
+
 }
