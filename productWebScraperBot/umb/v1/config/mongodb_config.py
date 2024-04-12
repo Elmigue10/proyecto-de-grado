@@ -4,7 +4,7 @@ import re
 import pymongo
 
 ## DOCKER
-client = pymongo.MongoClient("mongodb://admin:admin@mongo/")
+client = pymongo.MongoClient("mongodb://ComAdmin:C0m4dm1n@mongo/")
 ## LOCAL
 # client = pymongo.MongoClient("mongodb://localhost:27017/")
 database = client["web-scraper"]
