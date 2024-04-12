@@ -29,7 +29,31 @@ public class WebScraperResponseDTO {
     @JsonProperty("exitoWebScraperComputerTotal")
     private int exitoWebScraperComputerTotal;
 
-    @JsonProperty("ktronixWebScraperPhonesTotal")
+    @JsonProperty("mercadoLibreWebScraperComputerTotal")
     private int mercadoLibreWebScraperComputerTotal;
+
+    @JsonProperty("ktronixWebScraperMonitorTotal")
+    private int ktronixWebScraperMonitorTotal;
+
+    @JsonProperty("falabellaWebScraperMonitorTotal")
+    private int falabellaWebScraperMonitorTotal;
+
+    @JsonProperty("exitoWebScraperMonitorTotal")
+    private int exitoWebScraperMonitorTotal;
+
+    @JsonProperty("mercadoLibreWebScraperMonitorTotal")
+    private int mercadoLibreWebScraperMonitorTotal;
+
+    @JsonProperty("ktronixWebScraperTabletTotal")
+    private int ktronixWebScraperTabletTotal;
+
+    @JsonProperty("falabellaWebScraperTabletTotal")
+    private int falabellaWebScraperTabletTotal;
+
+    @JsonProperty("exitoWebScraperTabletTotal")
+    private int exitoWebScraperTabletTotal;
+
+    @JsonProperty("mercadoLibreWebScraperTabletTotal")
+    private int mercadoLibreWebScraperTabletTotal;
 
 }

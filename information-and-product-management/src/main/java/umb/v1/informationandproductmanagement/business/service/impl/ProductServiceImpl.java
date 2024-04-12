@@ -3,6 +3,7 @@ package umb.v1.informationandproductmanagement.business.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import umb.v1.informationandproductmanagement.business.client.ProductClient;
+import umb.v1.informationandproductmanagement.business.service.interfaces.IEmailService;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IJwtService;
 import umb.v1.informationandproductmanagement.business.service.interfaces.IProductService;
 import umb.v1.informationandproductmanagement.domain.exception.ApiException;
@@ -20,7 +21,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
-import static umb.v1.informationandproductmanagement.domain.utility.Constant.AUTHORIZATION_HEADER;
+import static umb.v1.informationandproductmanagement.domain.utility.Constant.*;
 
 @Service
 @Slf4j
@@ -32,19 +33,21 @@ public class ProductServiceImpl implements IProductService {
     private final SearchResultRepository searchResultRepository;
     private final UserWithRoleRepository userRepository;
     private final IJwtService jwtService;
+    private final IEmailService emailService;
 
     public ProductServiceImpl(ProductClient productClient,
                               ViewedProductRepository viewedProductRepository,
                               SearchHistoryRepository searchHistoryRepository,
                               SearchResultRepository searchResultRepository,
                               UserWithRoleRepository userRepository,
-                              IJwtService jwtService) {
+                              IJwtService jwtService, IEmailService emailService) {
         this.productClient = productClient;
         this.viewedProductRepository = viewedProductRepository;
         this.searchHistoryRepository = searchHistoryRepository;
         this.searchResultRepository = searchResultRepository;
         this.userRepository = userRepository;
         this.jwtService = jwtService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -146,7 +149,14 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public WebScraperResponseDTO webScraperBot(WebScraperRequestDTO webScraperRequest) {
-        return productClient.webScraperBot(webScraperRequest);
+
+        WebScraperResponseDTO webScraperResponse = productClient.webScraperBot(webScraperRequest);
+
+        String content = buildWebScraperEmailContent(webScraperRequest, webScraperResponse);
+
+        emailService.sendMail(ADMIN_EMAIL, PRODUCTS_WEB_SEARCH_RESULT, content);
+
+        return webScraperResponse;
     }
 
     private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders){
@@ -155,5 +165,152 @@ public class ProductServiceImpl implements IProductService {
         String email = jwtService.extractUsername(token);
         return userRepository.findByCorreoElectronico(email)
                 .orElseThrow(() -> new ApiException("Usuario no econtrado: " + email, 404));
+    }
+
+    private String buildWebScraperEmailContent(WebScraperRequestDTO webScraperRequest,
+                                               WebScraperResponseDTO webScraperResponse) {
+        StringBuilder content = new StringBuilder("<p><strong>Resultado de la búsqueda:</strong></p>");
+
+        if (webScraperRequest.isKtronixPhones() ||
+                webScraperRequest.isKtronixComputers() ||
+                webScraperRequest.isKtronixMonitors() ||
+                webScraperRequest.isKtronixTablets()) {
+            content.append("<p><strong>Ktronix:</strong></p>");
+
+            if (webScraperRequest.isKtronixPhones()) {
+                content.append("<p>");
+                content.append(SMARTPHONES);
+                content.append(webScraperResponse.getKtronixWebScraperPhonesTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isKtronixComputers()) {
+                content.append("<p>");
+                content.append(COMPUTERS);
+                content.append(webScraperResponse.getKtronixWebScraperComputerTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isKtronixMonitors()) {
+                content.append("<p>");
+                content.append(MONITORS);
+                content.append(webScraperResponse.getKtronixWebScraperMonitorTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isKtronixTablets()) {
+                content.append("<p>");
+                content.append(TABLETS);
+                content.append(webScraperResponse.getKtronixWebScraperTabletTotal());
+                content.append("</p>");
+            }
+        }
+
+        if (webScraperRequest.isExitoPhones() ||
+                webScraperRequest.isExitoComputers() ||
+                webScraperRequest.isExitoMonitors() ||
+                webScraperRequest.isExitoTablets()) {
+            content.append("<p><strong>Exito:</strong></p>");
+
+            if (webScraperRequest.isExitoPhones()) {
+                content.append("<p>");
+                content.append(SMARTPHONES);
+                content.append(webScraperResponse.getExitoWebScraperPhonesTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isExitoComputers()) {
+                content.append("<p>");
+                content.append(COMPUTERS);
+                content.append(webScraperResponse.getExitoWebScraperComputerTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isExitoMonitors()) {
+                content.append("<p>");
+                content.append(MONITORS);
+                content.append(webScraperResponse.getExitoWebScraperMonitorTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isExitoTablets()) {
+                content.append("<p>");
+                content.append(TABLETS);
+                content.append(webScraperResponse.getExitoWebScraperTabletTotal());
+                content.append("</p>");
+            }
+        }
+
+        if (webScraperRequest.isFalabellaPhones() ||
+                webScraperRequest.isFalabellaComputers() ||
+                webScraperRequest.isFalabellaMonitors() ||
+                webScraperRequest.isFalabellaTablets()) {
+            content.append("<p><strong>Falabella:</strong></p>");
+
+            if (webScraperRequest.isFalabellaPhones()) {
+                content.append("<p>");
+                content.append(SMARTPHONES);
+                content.append(webScraperResponse.getFalabellaWebScraperPhonesTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isFalabellaComputers()) {
+                content.append("<p>");
+                content.append(COMPUTERS);
+                content.append(webScraperResponse.getFalabellaWebScraperComputerTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isFalabellaMonitors()) {
+                content.append("<p>");
+                content.append(MONITORS);
+                content.append(webScraperResponse.getFalabellaWebScraperMonitorTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isFalabellaTablets()) {
+                content.append("<p>");
+                content.append(TABLETS);
+                content.append(webScraperResponse.getFalabellaWebScraperTabletTotal());
+                content.append("</p>");
+            }
+        }
+
+        if (webScraperRequest.isMercadoLibrePhones() ||
+                webScraperRequest.isMercadoLibreComputers() ||
+                webScraperRequest.isMercadoLibreMonitors() ||
+                webScraperRequest.isMercadoLibreTablets()) {
+            content.append("<p><strong>Mercado libre:</strong></p>");
+
+            if (webScraperRequest.isMercadoLibrePhones()) {
+                content.append("<p>");
+                content.append(SMARTPHONES);
+                content.append(webScraperResponse.getMercadoLibreWebScraperPhonesTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isMercadoLibreComputers()) {
+                content.append("<p>");
+                content.append(COMPUTERS);
+                content.append(webScraperResponse.getMercadoLibreWebScraperComputerTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isMercadoLibreMonitors()) {
+                content.append("<p>");
+                content.append(MONITORS);
+                content.append(webScraperResponse.getMercadoLibreWebScraperMonitorTotal());
+                content.append("</p>");
+            }
+
+            if (webScraperRequest.isMercadoLibreTablets()) {
+                content.append("<p>");
+                content.append(TABLETS);
+                content.append(webScraperResponse.getMercadoLibreWebScraperTabletTotal());
+                content.append("</p>");
+            }
+        }
+
+        return content.toString();
     }
 }

@@ -20,7 +20,7 @@ import java.util.function.Function;
 import static umb.v1.informationandproductmanagement.domain.utility.Constant.*;
 
 @Service
-public class JwtService implements IJwtService {
+public class JwtServiceImpl implements IJwtService {
 
     @Value("${service.values.security.jwt.secret-key}")
     private String secretKey;
