@@ -17,6 +17,10 @@ services:
 
   mongo:
     image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=ComAdmin
+      - MONGO_INITDB_ROOT_PASSWORD=C0m4dm1n
+      - MONGO_INITDB_DATABASE=web-scraper
     volumes:
       - mongodb_data:/data/db
     networks:
@@ -27,9 +31,9 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: umb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
+      - POSTGRES_DB=umb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./sql:/docker-entrypoint-initdb.d
