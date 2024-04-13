@@ -1,5 +1,6 @@
 package umb.v1.informationandproductmanagement.business.service.impl;
 
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import umb.v1.informationandproductmanagement.business.client.ProductClient;
@@ -150,8 +151,13 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public WebScraperResponseDTO webScraperBot(WebScraperRequestDTO webScraperRequest) {
 
-        WebScraperResponseDTO webScraperResponse = productClient.webScraperBot(webScraperRequest);
-
+        WebScraperResponseDTO webScraperResponse;
+        try {
+            webScraperResponse = productClient.webScraperBot(webScraperRequest);
+        } catch (FeignException e) {
+            emailService.sendMail(ADMIN, PRODUCTS_WEB_SEARCH_RESULT, buildErrorWebScraperEmailContent());
+            return null;
+        }
         String content = buildWebScraperEmailContent(webScraperRequest, webScraperResponse);
 
         emailService.sendMail(ADMIN_EMAIL, PRODUCTS_WEB_SEARCH_RESULT, content);
@@ -312,5 +318,10 @@ public class ProductServiceImpl implements IProductService {
         }
 
         return content.toString();
+    }
+
+    private String buildErrorWebScraperEmailContent() {
+        return "<p><strong>Resultado de la búsqueda:</strong></p>" +
+                "<p>Ocurrió un error en la búsqueda de productos en la web.</p>";
     }
 }
