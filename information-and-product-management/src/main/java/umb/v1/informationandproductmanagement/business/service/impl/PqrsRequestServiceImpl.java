@@ -70,8 +70,9 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
     }
 
     @Override
-    public PqrsRequestResponseDTO findAll() {
-        List<PqrsRequestEntity> pqrsRequests = pqrsRequestRepository.findAll();
+    public PqrsRequestResponseDTO findAll(int skip, int limit) {
+        List<PqrsRequestEntity> pqrsRequests = pqrsRequestRepository.findAll(skip, limit);
+        long pqrsRequestsQuantity = pqrsRequestRepository.count();
 
         List<PqrsRequestDTO> pqrsRequestsDTO = new ArrayList<>();
         pqrsRequests.forEach(request -> {
@@ -118,6 +119,7 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
                 .message(OK)
                 .status(200)
                 .pqrsRequest(pqrsRequestsDTO)
+                .total(pqrsRequestsQuantity)
                 .build();
     }
 
@@ -163,11 +165,12 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
     }
 
     @Override
-    public PqrsRequestResponseDTO findByEmail(String correoElectronico) {
+    public PqrsRequestResponseDTO findByEmail(String correoElectronico, int skip, int limit) {
         UserWithRoleEntity user = userWithRoleRepository.findByCorreoElectronico(correoElectronico)
                 .orElseThrow(() -> new ApiException("Usuario no encontrado", 404));
 
-        List<PqrsRequestEntity> pqrsRequestEntities = pqrsRequestRepository.findByUserId(user.getId());
+        List<PqrsRequestEntity> pqrsRequestEntities = pqrsRequestRepository.findByUserId(user.getId(), skip, limit);
+        long pqrsRequestsQuantity = pqrsRequestRepository.countByUserId(user.getId());
 
         List<PqrsRequestDTO> pqrsRequests = new ArrayList<>();
         pqrsRequestEntities.forEach(pqrsRequest -> {
@@ -193,6 +196,7 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
         return PqrsRequestResponseDTO.builder()
                 .message(OK)
                 .status(200)
+                .total(pqrsRequestsQuantity)
                 .pqrsRequest(pqrsRequests)
                 .build();
     }

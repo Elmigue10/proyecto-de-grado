@@ -66,6 +66,18 @@ public interface ProductClient {
                                            @RequestParam("skip") int skip,
                                            @RequestParam("limit") int limit);
 
+    @GetMapping("/find-by-storage-capacity")
+    ResponseProductListDTO findByStorageCapacity(@RequestParam("storage_capacity") String storageCapacity,
+                                                 @RequestParam("category_name") String categoryName,
+                                                 @RequestParam("skip") int skip,
+                                                 @RequestParam("limit") int limit);
+
+    @GetMapping("/find-by-screen-size")
+    ResponseProductListDTO findByScreenSize(@RequestParam("screen_size") String screenSize,
+                                            @RequestParam("category_name") String categoryName,
+                                            @RequestParam("skip") int skip,
+                                            @RequestParam("limit") int limit);
+
     @PostMapping("/find-by-id-list")
     ResponseProductListDTO findByIdList(@RequestBody RequestFindByIdListDTO request);
 

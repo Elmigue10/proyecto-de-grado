@@ -18,6 +18,9 @@ public class PqrsRequestResponseDTO {
     @JsonProperty("status")
     private int status;
 
+    @JsonProperty("total")
+    private long total;
+
     @JsonProperty("pqrs")
     private List<PqrsRequestDTO> pqrsRequest;
 

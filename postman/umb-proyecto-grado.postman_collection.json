@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVsQGVtYWlsLmNvbSIsInN1YiI6Im1pZ3VlbEBlbWFpbC5jb20iLCJpYXQiOjE3MTIxOTMxMTEsImV4cCI6MTcxMjI3OTUxMX0.v-GIfMcpOWXo3M004Iehe_vIE4_My6QS4OIJNdPIMDo",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEyOTcyNTc3LCJleHAiOjE3MTMwNTg5Nzd9.hZUnEDOlCxIMcXMfQ80-_wqjk3RUrkn7qnVc_msrwrY",
 									"type": "string"
 								}
 							]
@@ -58,7 +58,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVsQGVtYWlsLmNvbSIsInN1YiI6Im1pZ3VlbEBlbWFpbC5jb20iLCJpYXQiOjE3MTIxNzU1NjgsImV4cCI6MTcxMjI2MTk2OH0.p9dZ76A5LnnYmmzapMF5d20Slj7yGUQHGBpbssx5k2w",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyOTYxOTUzLCJleHAiOjE3MTMwNDgzNTN9.kvOsobQiy5yD4KOTQutwWQcPyo5-wQEJA4j-ahhtM0s",
 									"type": "string"
 								}
 							]
@@ -99,7 +99,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVsQGVtYWlsLmNvbSIsInN1YiI6Im1pZ3VlbEBlbWFpbC5jb20iLCJpYXQiOjE3MTIxNzU1NjgsImV4cCI6MTcxMjI2MTk2OH0.p9dZ76A5LnnYmmzapMF5d20Slj7yGUQHGBpbssx5k2w",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEyOTYyMDI5LCJleHAiOjE3MTMwNDg0Mjl9.CI0lOFsV-XVAAzlDv2vpgjsVplOMQ7Z1cFR9J9kmkX8",
 									"type": "string"
 								}
 							]
@@ -529,6 +529,106 @@
 					"response": []
 				},
 				{
+					"name": "find-by-storage-capacity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjEzNzc2LCJleHAiOjE3MTMzMDAxNzZ9.iKFnn1LdHKup2DSmzne8rdHG1-Tk-tO3JPtBOoGuOoQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-storage-capacity?storage_capacity=64&category_name=smartphone&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-storage-capacity"
+							],
+							"query": [
+								{
+									"key": "storage_capacity",
+									"value": "64"
+								},
+								{
+									"key": "category_name",
+									"value": "smartphone"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find-by-screen-size",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjEzODk2LCJleHAiOjE3MTMzMDAyOTZ9.86uS7znAtz-I1k0LIGST_SpVnxmIQepNIgJKluyRlB4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/umb/v1/product/find-by-screen-size?screen_size=22&category_name=monitor&skip=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"umb",
+								"v1",
+								"product",
+								"find-by-screen-size"
+							],
+							"query": [
+								{
+									"key": "screen_size",
+									"value": "22"
+								},
+								{
+									"key": "category_name",
+									"value": "monitor"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "find-most-viewed",
 					"request": {
 						"auth": {
@@ -611,10 +711,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/auth",
+							"raw": "http://ec2-54-158-4-132.compute-1.amazonaws.com:8080/umb/v1/auth",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-54-158-4-132",
+								"compute-1",
+								"amazonaws",
+								"com"
 							],
 							"port": "8080",
 							"path": [
@@ -696,10 +799,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/user/forgot-password?correoElectronico=migued77@gmail.com",
+							"raw": "http://ec2-54-158-4-132.compute-1.amazonaws.com:8080/umb/v1/user/forgot-password?correoElectronico=migued77@gmail.com",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-54-158-4-132",
+								"compute-1",
+								"amazonaws",
+								"com"
 							],
 							"port": "8080",
 							"path": [
@@ -918,7 +1024,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEyMzYwOTAzLCJleHAiOjE3MTI0NDczMDN9.9zVqfOdYpFPFAYIv1hTNTbz8GKACH8o3YzZaCeI-vbk",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjExMzc4LCJleHAiOjE3MTMyOTc3Nzh9.dMdQJj3m8BTb_4G7brJT9-T-Z-JW_ifg5vzwVogurIc",
 									"type": "string"
 								}
 							]
@@ -926,7 +1032,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/pqrs/find-by-email?correoElectronico=migued77@gmail.com",
+							"raw": "http://localhost:8080/umb/v1/pqrs/find-by-email?correoElectronico=migued77@gmail.com&skip=0&limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -942,6 +1048,14 @@
 								{
 									"key": "correoElectronico",
 									"value": "migued77@gmail.com"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
 								}
 							]
 						}
@@ -991,7 +1105,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyMTkzOTQyLCJleHAiOjE3MTIyODAzNDJ9.p0_d4PUer4fBLm86rEFLuiS_llZaWQfy1rg5x8K-g0s",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyOTczMzEwLCJleHAiOjE3MTMwNTk3MTB9.Wj6tQEvBLF0TqoJSoBcqgPx4WNieVicoWxjbVwup1jI",
 									"type": "string"
 								}
 							]
@@ -1000,7 +1114,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"ktronixPhones\": true,\r\n  \"falabellaPhones\": true,\r\n  \"exitoPhones\": true,\r\n  \"mercadoLibrePhones\": true,\r\n  \"ktronixComputers\": true,\r\n  \"falabellaComputers\": true,\r\n  \"exitoComputers\": true,\r\n  \"mercadoLibreComputers\": true,\r\n  \"ktronixMonitors\": true,\r\n  \"falabellaMonitors\": true,\r\n  \"exitoMonitors\": true,\r\n  \"mercadoLibreMonitors\": true,\r\n  \"ktronixTablets\": true,\r\n  \"falabellaTablets\": true,\r\n  \"exitoTablets\": true,\r\n  \"mercadoLibreTablets\": true\r\n}",
+							"raw": "{\r\n    \"ktronixPhones\": true,\r\n    \"falabellaPhones\": true,\r\n    \"exitoPhones\": true,\r\n    \"mercadoLibrePhones\": true,\r\n    \"ktronixComputers\": true,\r\n    \"falabellaComputers\": true,\r\n    \"exitoComputers\": true,\r\n    \"mercadoLibreComputers\": true,\r\n    \"ktronixMonitors\": true,\r\n    \"falabellaMonitors\": true,\r\n    \"exitoMonitors\": true,\r\n    \"mercadoLibreMonitors\": true,\r\n    \"ktronixTablets\": true,\r\n    \"falabellaTablets\": true,\r\n    \"exitoTablets\": true,\r\n    \"mercadoLibreTablets\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1008,10 +1122,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/product/web-scraper-bot",
+							"raw": "http://ec2-54-158-4-132.compute-1.amazonaws.com:8080/umb/v1/product/web-scraper-bot",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-54-158-4-132",
+								"compute-1",
+								"amazonaws",
+								"com"
 							],
 							"port": "8080",
 							"path": [
@@ -1032,7 +1149,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyMzYxMjU3LCJleHAiOjE3MTI0NDc2NTd9.Wyf4rsDAqIQG6TP3MLDzIYTzCxDNFez5NpbVxS0SxPs",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEzMjEwODE4LCJleHAiOjE3MTMyOTcyMTh9.HImN_j7jIfxpN7fL_UdVSF99bpTPxHK_cC0GKBIHZDU",
 									"type": "string"
 								}
 							]
@@ -1040,7 +1157,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/pqrs/find-all",
+							"raw": "http://localhost:8080/umb/v1/pqrs/find-all?skip=0&limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1051,6 +1168,16 @@
 								"v1",
 								"pqrs",
 								"find-all"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},

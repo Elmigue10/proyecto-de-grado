@@ -21,9 +21,10 @@ public class PqrsController {
     }
 
     @GetMapping("/find-all")
-    public ResponseEntity<PqrsRequestResponseDTO> findAll() {
+    public ResponseEntity<PqrsRequestResponseDTO> findAll(@RequestParam(name = "skip") int skip,
+                                                          @RequestParam (name = "limit") int limit) {
         log.info("arrived request for find-all");
-        PqrsRequestResponseDTO response = pqrsRequestService.findAll();
+        PqrsRequestResponseDTO response = pqrsRequestService.findAll(skip, limit);
 
         log.info("find-all response: {}", response);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -48,9 +49,11 @@ public class PqrsController {
     }
 
     @GetMapping("/find-by-email")
-    public ResponseEntity<PqrsRequestResponseDTO> findByEmail(@RequestParam("correoElectronico") String correoElectronico){
+    public ResponseEntity<PqrsRequestResponseDTO> findByEmail(@RequestParam("correoElectronico") String correoElectronico,
+                                                              @RequestParam(name = "skip") int skip,
+                                                              @RequestParam (name = "limit") int limit){
         log.info("arrived request for find-by-email");
-        PqrsRequestResponseDTO response = pqrsRequestService.findByEmail(correoElectronico);
+        PqrsRequestResponseDTO response = pqrsRequestService.findByEmail(correoElectronico, skip, limit);
 
         log.info("find-by-email response: {}", response);
         return new ResponseEntity<>(response, HttpStatus.OK);

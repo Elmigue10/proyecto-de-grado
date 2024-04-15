@@ -147,13 +147,13 @@ public class ProductController {
 
     @GetMapping("/find-by-brand-category-and-platform")
     public ResponseEntity<ResponseProductListDTO> findByBrandCategoryAndPlatform(@RequestParam("brand_name") String brandName,
-                                                          @RequestParam("category_name") String categoryName,
-                                                          @RequestParam("platform_name") String platformName,
-                                                          @RequestParam("skip") int skip,
-                                                          @RequestParam("limit") int limit){
+                                                                                 @RequestParam("category_name") String categoryName,
+                                                                                 @RequestParam("platform_name") String platformName,
+                                                                                 @RequestParam("skip") int skip,
+                                                                                 @RequestParam("limit") int limit) {
         log.info("arrived request for find-by-brand-category-and-platform. brand_name: {}, category_name: {}, " +
                 "platform_name: {} skip: {}, limit: {}", brandName, categoryName, platformName, skip, limit);
-        
+
         ResponseProductListDTO productsResponse = productService
                 .findByBrandCategoryAndPlatform(brandName, categoryName, platformName, skip, limit);
 
@@ -166,10 +166,10 @@ public class ProductController {
     public ResponseEntity<ResponseProductListDTO> findByRamMemory(@RequestParam("ram_memory") String ramMemory,
                                                                   @RequestParam("category_name") String categoryName,
                                                                   @RequestParam("skip") int skip,
-                                                                  @RequestParam("limit") int limit){
+                                                                  @RequestParam("limit") int limit) {
         log.info("arrived request for find-by-ram-memory. ram_memory: {}, category_name: {}, " +
                 "skip: {}, limit: {}", ramMemory, categoryName, skip, limit);
-        
+
         ResponseProductListDTO productsResponse = productService.findByRamMemory(ramMemory, categoryName, skip, limit);
 
         log.info("find-by-ram-memory response: {}", productsResponse);
@@ -177,8 +177,40 @@ public class ProductController {
         return new ResponseEntity<>(productsResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/find-by-storage-capacity")
+    public ResponseEntity<ResponseProductListDTO> findByStorageCapacity(@RequestParam("storage_capacity") String storageCapacity,
+                                                                        @RequestParam("category_name") String categoryName,
+                                                                        @RequestParam("skip") int skip,
+                                                                        @RequestParam("limit") int limit) {
+        log.info("arrived request for find-by-storage-capacity. ram_memory: {}, category_name: {}, " +
+                "skip: {}, limit: {}", storageCapacity, categoryName, skip, limit);
+
+        ResponseProductListDTO productsResponse =
+                productService.findByStorageCapacity(storageCapacity, categoryName, skip, limit);
+
+        log.info("find-by-storage-capacity response: {}", productsResponse);
+
+        return new ResponseEntity<>(productsResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/find-by-screen-size")
+    public ResponseEntity<ResponseProductListDTO> findByScreenSize(@RequestParam("screen_size") String screenSize,
+                                                                   @RequestParam("category_name") String categoryName,
+                                                                   @RequestParam("skip") int skip,
+                                                                   @RequestParam("limit") int limit) {
+        log.info("arrived request for find-by-screen-size. ram_memory: {}, category_name: {}, " +
+                "skip: {}, limit: {}", screenSize, categoryName, skip, limit);
+
+        ResponseProductListDTO productsResponse =
+                productService.findByScreenSize(screenSize, categoryName, skip, limit);
+
+        log.info("find-by-screen-size response: {}", productsResponse);
+
+        return new ResponseEntity<>(productsResponse, HttpStatus.OK);
+    }
+
     @GetMapping("/find-most-viewed")
-    public ResponseEntity<ResponseProductListDTO> findMostViewed(){
+    public ResponseEntity<ResponseProductListDTO> findMostViewed() {
         log.info("arrived request for find-most-viewed");
 
         ResponseProductListDTO productsResponse = productService.findMostViewed();
@@ -189,7 +221,7 @@ public class ProductController {
     }
 
     @PostMapping("/web-scraper-bot")
-    public ResponseEntity<WebScraperResponseDTO> webScraperBot(@RequestBody WebScraperRequestDTO webScraperRequest){
+    public ResponseEntity<WebScraperResponseDTO> webScraperBot(@RequestBody WebScraperRequestDTO webScraperRequest) {
         log.info("arrived request for web-scraper-bot");
 
         WebScraperResponseDTO webScraperResponse = productService.webScraperBot(webScraperRequest);

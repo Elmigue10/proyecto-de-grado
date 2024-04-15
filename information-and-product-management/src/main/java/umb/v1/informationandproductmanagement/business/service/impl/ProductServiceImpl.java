@@ -63,10 +63,10 @@ public class ProductServiceImpl implements IProductService {
         UserWithRoleEntity user = findUserByJwtTokenClaims(requestHeaders);
 
         viewedProductRepository.save(ViewedProductEntity.builder()
-                        .idProductoMongodb(responseProduct.getProduct().getId())
-                        .nombreProductoMongodb(responseProduct.getProduct().getNombre())
-                        .fecha(new Timestamp(System.currentTimeMillis()))
-                        .usuarioId(user.getId())
+                .idProductoMongodb(responseProduct.getProduct().getId())
+                .nombreProductoMongodb(responseProduct.getProduct().getNombre())
+                .fecha(new Timestamp(System.currentTimeMillis()))
+                .usuarioId(user.getId())
                 .build());
 
         return responseProduct;
@@ -99,7 +99,7 @@ public class ProductServiceImpl implements IProductService {
                 .usuarioId(user.getId())
                 .build());
 
-        responseProducts.getProducts().forEach( product -> searchResultRepository.save(SearchResultEntity.builder()
+        responseProducts.getProducts().forEach(product -> searchResultRepository.save(SearchResultEntity.builder()
                 .historialBusquedaId(searchHistory.getId())
                 .idProductoMongodb(product.getId())
                 .build()));
@@ -134,6 +134,16 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    public ResponseProductListDTO findByStorageCapacity(String storageCapacity, String categoryName, int skip, int limit) {
+        return productClient.findByStorageCapacity(storageCapacity, categoryName, skip, limit);
+    }
+
+    @Override
+    public ResponseProductListDTO findByScreenSize(String screenSize, String categoryName, int skip, int limit) {
+        return productClient.findByScreenSize(screenSize, categoryName, skip, limit);
+    }
+
+    @Override
     public ResponseProductListDTO findMostViewed() {
         List<ViewedProductEntity> viewedProducts = viewedProductRepository.findByViews();
 
@@ -165,7 +175,7 @@ public class ProductServiceImpl implements IProductService {
         return webScraperResponse;
     }
 
-    private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders){
+    private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders) {
         String authorizationHeader = requestHeaders.get(AUTHORIZATION_HEADER);
         String token = authorizationHeader.substring(6);
         String email = jwtService.extractUsername(token);

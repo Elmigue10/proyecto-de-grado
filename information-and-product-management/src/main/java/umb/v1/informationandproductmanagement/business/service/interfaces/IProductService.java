@@ -27,7 +27,12 @@ public interface IProductService {
 
     ResponseProductListDTO findByRamMemory(String ramMemory, String categoryName, int skip, int limit);
 
+    ResponseProductListDTO findByStorageCapacity(String storageCapacity, String categoryName, int skip, int limit);
+
+    ResponseProductListDTO findByScreenSize(String screenSize, String categoryName, int skip, int limit);
+
     ResponseProductListDTO findMostViewed();
 
     WebScraperResponseDTO webScraperBot(WebScraperRequestDTO webScraperRequest);
+
 }

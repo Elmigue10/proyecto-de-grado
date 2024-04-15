@@ -78,6 +78,13 @@ def find_by_brand_category_and_platform(brand_name: str = '', category_name: str
 def find_by_ram_memory(ram_memory: str = '', category_name: str = '', skip: int = 0, limit: int = 10):
     return product_service.find_by_ram_memory(ram_memory, category_name, skip, limit)
 
+@api_router.get("/umb/v1/product/find-by-storage-capacity")
+def find_by_storage_capacity(storage_capacity: str = '', category_name: str = '', skip: int = 0, limit: int = 10):
+    return product_service.find_by_storage_capacity(storage_capacity, category_name, skip, limit)
+
+@api_router.get("/umb/v1/product/find-by-screen-size")
+def find_by_screen_size(screen_size: str = '', category_name: str = '', skip: int = 0, limit: int = 10):
+    return product_service.find_by_screen_size(screen_size, category_name, skip, limit)
 
 @api_router.post("/umb/v1/product/find-by-id-list")
 def find_by_id_list(product_find_id_list_request: ProductFindByIdListRequestModel):

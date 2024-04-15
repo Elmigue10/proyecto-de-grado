@@ -179,6 +179,57 @@ def find_by_ram_memory(ram_memory, category_name, skip, limit):
     }
 
 
+def find_by_storage_capacity(storage_capacity, category_name, skip, limit):
+    category_regex = re.compile(f'^{re.escape(category_name)}$', re.IGNORECASE)
+    category_query = {'categoria': {'$regex': category_regex}}
+
+    query_storage_capacity = {
+        "caracteristicas": {
+            "$elemMatch": {
+                "nombre": {
+                    "$regex": "(memoria interna|capacidad de disco|disco duro|capacidad de almacenamiento|"
+                              "unidad de estado sólido ssd|capacidad)",
+                    "$options": "i"},
+                "valor": {"$regex": storage_capacity}
+            }
+        }
+    }
+
+    query = {'$and': [query_storage_capacity, category_query]}
+
+    results = collection.find(query).skip(skip).limit(limit)
+    total_items = collection.count_documents(query)
+
+    return {
+        'products': list(results),
+        'total_items': total_items
+    }
+
+
+def find_by_screen_size(screen_size, category_name, skip, limit):
+    category_regex = re.compile(f'^{re.escape(category_name)}$', re.IGNORECASE)
+    category_query = {'categoria': {'$regex': category_regex}}
+
+    query_screen_size = {
+        "caracteristicas": {
+            "$elemMatch": {
+                "nombre": {"$regex": "tamaño.*pantalla|pantalla.*tamaño", "$options": "i"},
+                "valor": {"$regex": screen_size}
+            }
+        }
+    }
+
+    query = {'$and': [query_screen_size, category_query]}
+
+    results = collection.find(query).skip(skip).limit(limit)
+    total_items = collection.count_documents(query)
+
+    return {
+        'products': list(results),
+        'total_items': total_items
+    }
+
+
 def find_by_id_list(id_list, skip, limit):
     query = {"_id": {"$in": id_list}}
 

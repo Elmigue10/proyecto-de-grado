@@ -13,11 +13,11 @@ public interface IPqrsRequestService {
 
     void updatePqrsRequestUpdatePassword(Long pqrsId);
 
-    PqrsRequestResponseDTO findAll();
+    PqrsRequestResponseDTO findAll(int skip, int limit);
 
     PqrsRequestResponseDTO save(PqrsRequestDTO pqrsRequest);
 
     PqrsRequestResponseDTO update(PqrsRequestDTO pqrsRequest);
 
-    PqrsRequestResponseDTO findByEmail(String correoElectronico);
+    PqrsRequestResponseDTO findByEmail(String correoElectronico, int skip, int limit);
 }

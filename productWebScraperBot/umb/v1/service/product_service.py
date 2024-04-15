@@ -159,6 +159,30 @@ def find_by_ram_memory(ram_memory, category_name, skip, limit):
     }
 
 
+def find_by_storage_capacity(storage_capacity, category_name, skip, limit):
+    results = mongodb_config.find_by_storage_capacity(storage_capacity.strip(), category_name.strip(),
+                                                      skip, limit)
+
+    return {
+        'message': "OK",
+        'status': 200,
+        'productos': results["products"],
+        'totalProductos': results["total_items"]
+    }
+
+
+def find_by_screen_size(screen_size, category_name, skip, limit):
+    results = mongodb_config.find_by_screen_size(screen_size.strip(), category_name.strip(),
+                                                 skip, limit)
+
+    return {
+        'message': "OK",
+        'status': 200,
+        'productos': results["products"],
+        'totalProductos': results["total_items"]
+    }
+
+
 def find_by_id_list(product_find_id_list_request):
     results = mongodb_config.find_by_id_list(product_find_id_list_request.id_list,
                                              product_find_id_list_request.skip,

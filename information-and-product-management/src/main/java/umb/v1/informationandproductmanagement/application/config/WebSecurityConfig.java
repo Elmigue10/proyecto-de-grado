@@ -56,6 +56,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/product/find-by-platform-and-category").hasRole(CLIENTE)
                         .requestMatchers("/product/find-by-brand-category-and-platform").hasRole(CLIENTE)
                         .requestMatchers("/product/find-by-ram-memory").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-storage-capacity").hasRole(CLIENTE)
+                        .requestMatchers("/product/find-by-screen-size").hasRole(CLIENTE)
                         .requestMatchers("/product/find-most-viewed").hasRole(CLIENTE)
                         .requestMatchers("/user/search-history").hasRole(CLIENTE)
                         .requestMatchers("/user/viewed-products").hasRole(CLIENTE)
