@@ -40,10 +40,12 @@ public class UserController {
     }
 
     @GetMapping("/viewed-products")
-    public ResponseEntity<ResponseProductListDTO> viewedProducts(@RequestHeader Map<String, String> requestHeaders) {
+    public ResponseEntity<ResponseProductListDTO> viewedProducts(@RequestHeader Map<String, String> requestHeaders,
+                                                                 @RequestParam("skip") int skip,
+                                                                 @RequestParam("limit") int limit) {
         log.info("arrived request for viewed-products");
 
-        ResponseProductListDTO responseProducts = userService.viewedProducts(requestHeaders);
+        ResponseProductListDTO responseProducts = userService.viewedProducts(requestHeaders, skip, limit);
 
         return new ResponseEntity<>(responseProducts, HttpStatus.OK);
     }

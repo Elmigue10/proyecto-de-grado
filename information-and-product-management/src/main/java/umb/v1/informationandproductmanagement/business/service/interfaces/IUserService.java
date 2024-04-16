@@ -9,7 +9,7 @@ public interface IUserService {
 
     SearchHistoryResponseDTO searchHistory(Map<String, String> requestHeaders);
 
-    ResponseProductListDTO viewedProducts(Map<String, String> requestHeaders);
+    ResponseProductListDTO viewedProducts(Map<String, String> requestHeaders, int skip, int limit);
 
     ResponseProductDTO forgotPassword(String correoElectronico);
 

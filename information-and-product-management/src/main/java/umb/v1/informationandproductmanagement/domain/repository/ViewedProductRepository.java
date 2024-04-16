@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ViewedProductRepository extends JpaRepository<ViewedProductEntity, Long> {
 
-    List<ViewedProductEntity> findByUsuarioId(Long usuarioId);
+    List<ViewedProductEntity> findByUsuarioIdOrderByFechaDesc(Long usuarioId);
 
     @Query(value = "SELECT pv.*, views.views_count FROM producto_visto pv JOIN (" +
             "SELECT id_producto_mongodb, COUNT(id_producto_mongodb) AS views_count " +

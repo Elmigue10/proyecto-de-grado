@@ -17,6 +17,7 @@ import umb.v1.informationandproductmanagement.domain.repository.*;
 
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static umb.v1.informationandproductmanagement.domain.utility.Constant.*;
 
@@ -116,13 +117,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public ResponseProductListDTO viewedProducts(Map<String, String> requestHeaders) {
+    public ResponseProductListDTO viewedProducts(Map<String, String> requestHeaders, int skip, int limit) {
         UserWithRoleEntity user = findUserByJwtTokenClaims(requestHeaders);
-        List<ViewedProductEntity> viewedProducts = viewedProductRepository.findByUsuarioId(user.getId());
+        List<ViewedProductEntity> viewedProducts = viewedProductRepository.findByUsuarioIdOrderByFechaDesc(user.getId());
 
         List<String> productIdList = viewedProducts.stream()
-                .map(ViewedProductEntity::getIdProductoMongodb)
-                .toList();
+                .map(ViewedProductEntity::getIdProductoMongodb).distinct().toList();
 
         return productClient.findByIdList(RequestFindByIdListDTO.builder()
                 .idList(productIdList)
