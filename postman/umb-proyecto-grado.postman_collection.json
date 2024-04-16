@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEyOTcyNTc3LCJleHAiOjE3MTMwNTg5Nzd9.hZUnEDOlCxIMcXMfQ80-_wqjk3RUrkn7qnVc_msrwrY",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjQxODMzLCJleHAiOjE3MTMzMjgyMzN9.7B7qBSh3UsNUQ0aEiCSxmhkN4x31o_WO_1j4f-OYmXw",
 									"type": "string"
 								}
 							]
@@ -25,7 +25,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/product?skip=0&limit=10",
+							"raw": "http://localhost:8080/umb/v1/product?skip=10&limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -39,7 +39,7 @@
 							"query": [
 								{
 									"key": "skip",
-									"value": "0"
+									"value": "10"
 								},
 								{
 									"key": "limit",
@@ -58,7 +58,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyOTYxOTUzLCJleHAiOjE3MTMwNDgzNTN9.kvOsobQiy5yD4KOTQutwWQcPyo5-wQEJA4j-ahhtM0s",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjQxODMzLCJleHAiOjE3MTMzMjgyMzN9.7B7qBSh3UsNUQ0aEiCSxmhkN4x31o_WO_1j4f-OYmXw",
 									"type": "string"
 								}
 							]
@@ -67,7 +67,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"productoId\": \"Portatil Dell Inspiron 3525amd Ryzen 7 5700u-512gb-16 Ram Color Gr-mercado-libre\"\r\n}",
+							"raw": "{\r\n    \"productoId\": \"iPhone 13 128GB Azul Medianoche-Iphone 13-128 GB--ktronix\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -769,7 +769,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVsQGVtYWlsLmNvbSIsInN1YiI6Im1pZ3VlbEBlbWFpbC5jb20iLCJpYXQiOjE3MTIxODAzMzksImV4cCI6MTcxMjI2NjczOX0.nBe9ng7GXtkUCsei-EjvSpxLHAAlFpEzkZbVE3EMEl4",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjQxODMzLCJleHAiOjE3MTMzMjgyMzN9.7B7qBSh3UsNUQ0aEiCSxmhkN4x31o_WO_1j4f-OYmXw",
 									"type": "string"
 								}
 							]
@@ -777,7 +777,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/user/viewed-products",
+							"raw": "http://localhost:8080/umb/v1/user/viewed-products?skip=0&limit=3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -788,6 +788,16 @@
 								"v1",
 								"user",
 								"viewed-products"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
 							]
 						}
 					},
@@ -983,7 +993,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyMzYxMjU3LCJleHAiOjE3MTI0NDc2NTd9.Wyf4rsDAqIQG6TP3MLDzIYTzCxDNFez5NpbVxS0SxPs",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjM1MjIyLCJleHAiOjE3MTMzMjE2MjJ9.I16KE8SQ36PbdJikteep7vgaBcMADdMLhSXvk-vfP1A",
 									"type": "string"
 								}
 							]
@@ -1000,10 +1010,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/pqrs/save",
+							"raw": "http://ec2-54-158-4-132.compute-1.amazonaws.com:8080/umb/v1/pqrs/save",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-54-158-4-132",
+								"compute-1",
+								"amazonaws",
+								"com"
 							],
 							"port": "8080",
 							"path": [
@@ -1082,10 +1095,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/auth",
+							"raw": "http://ec2-54-158-4-132.compute-1.amazonaws.com:8080/umb/v1/auth",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-54-158-4-132",
+								"compute-1",
+								"amazonaws",
+								"com"
 							],
 							"port": "8080",
 							"path": [
@@ -1157,10 +1173,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/pqrs/find-all?skip=0&limit=10",
+							"raw": "http://ec2-54-158-4-132.compute-1.amazonaws.com:8080/umb/v1/pqrs/find-all?skip=0&limit=10",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-54-158-4-132",
+								"compute-1",
+								"amazonaws",
+								"com"
 							],
 							"port": "8080",
 							"path": [
@@ -1191,7 +1210,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEyMzYxMjU3LCJleHAiOjE3MTI0NDc2NTd9.Wyf4rsDAqIQG6TP3MLDzIYTzCxDNFez5NpbVxS0SxPs",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQURNSU4iLCJFTUFJTCI6Im1pZ3VlbC5hZG1pbkBlbWFpbC5jb20iLCJzdWIiOiJtaWd1ZWwuYWRtaW5AZW1haWwuY29tIiwiaWF0IjoxNzEzMjM1Nzc0LCJleHAiOjE3MTMzMjIxNzR9.MBAmlDKstnjkuHSE7sJJqfM9ZKUC9Cu_8lkyGztphgo",
 									"type": "string"
 								}
 							]
@@ -1200,7 +1219,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 5\r\n}",
+							"raw": "{\r\n    \"id\": 18\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1208,10 +1227,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/pqrs/update",
+							"raw": "http://ec2-54-158-4-132.compute-1.amazonaws.com:8080/umb/v1/pqrs/update",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-54-158-4-132",
+								"compute-1",
+								"amazonaws",
+								"com"
 							],
 							"port": "8080",
 							"path": [
