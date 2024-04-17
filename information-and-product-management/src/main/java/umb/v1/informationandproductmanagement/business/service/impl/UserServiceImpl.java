@@ -81,9 +81,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public SearchHistoryResponseDTO searchHistory(Map<String, String> requestHeaders) {
+    public SearchHistoryResponseDTO searchHistory(Map<String, String> requestHeaders, int skip, int limit) {
         UserWithRoleEntity user = findUserByJwtTokenClaims(requestHeaders);
-        List<SearchHistoryEntity> searches = searchHistoryRepository.findByUsuarioId(user.getId());
+        List<SearchHistoryEntity> searches =
+                searchHistoryRepository.findByUsuarioIdOrderByFechaDesc(user.getId(), skip, limit);
 
         List<SearchHistoryDTO> searchHistory = new ArrayList<>();
         searches.forEach(search -> {

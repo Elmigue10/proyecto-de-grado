@@ -7,7 +7,7 @@ import java.util.Map;
 public interface IUserService {
     ResponseProductDTO save(UserDTO user);
 
-    SearchHistoryResponseDTO searchHistory(Map<String, String> requestHeaders);
+    SearchHistoryResponseDTO searchHistory(Map<String, String> requestHeaders, int skip, int limit);
 
     ResponseProductListDTO viewedProducts(Map<String, String> requestHeaders, int skip, int limit);
 

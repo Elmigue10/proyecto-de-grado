@@ -31,10 +31,12 @@ public class UserController {
     }
 
     @GetMapping("/search-history")
-    public ResponseEntity<SearchHistoryResponseDTO> searchHistory(@RequestHeader Map<String, String> requestHeaders) {
+    public ResponseEntity<SearchHistoryResponseDTO> searchHistory(@RequestHeader Map<String, String> requestHeaders,
+                                                                  @RequestParam("skip") int skip,
+                                                                  @RequestParam("limit") int limit) {
         log.info("arrived request for search-history");
 
-        SearchHistoryResponseDTO searchHistoryResponse = userService.searchHistory(requestHeaders);
+        SearchHistoryResponseDTO searchHistoryResponse = userService.searchHistory(requestHeaders, skip, limit);
 
         return new ResponseEntity<>(searchHistoryResponse, HttpStatus.OK);
     }

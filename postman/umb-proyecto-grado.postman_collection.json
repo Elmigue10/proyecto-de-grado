@@ -237,7 +237,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVsQGVtYWlsLmNvbSIsInN1YiI6Im1pZ3VlbEBlbWFpbC5jb20iLCJpYXQiOjE3MTIxODAzMzksImV4cCI6MTcxMjI2NjczOX0.nBe9ng7GXtkUCsei-EjvSpxLHAAlFpEzkZbVE3EMEl4",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMzc2NzYxLCJleHAiOjE3MTM0NjMxNjF9.EJ5BVtgzaZ-2GhQj6fknavBmMSmVUVwjSGrPshXTAig",
 									"type": "string"
 								}
 							]
@@ -246,7 +246,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"productName\": \"celular motorola g\",\r\n    \"skip\": 0,\r\n    \"limit\": 10\r\n}",
+							"raw": "{\r\n    \"productName\": \"samsung\",\r\n    \"skip\": 0,\r\n    \"limit\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -747,7 +747,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVsQGVtYWlsLmNvbSIsInN1YiI6Im1pZ3VlbEBlbWFpbC5jb20iLCJpYXQiOjE3MTIxODAzMzksImV4cCI6MTcxMjI2NjczOX0.nBe9ng7GXtkUCsei-EjvSpxLHAAlFpEzkZbVE3EMEl4",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMzc2NzYxLCJleHAiOjE3MTM0NjMxNjF9.EJ5BVtgzaZ-2GhQj6fknavBmMSmVUVwjSGrPshXTAig",
 									"type": "string"
 								}
 							]
@@ -755,7 +755,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/user/search-history",
+							"raw": "http://localhost:8080/umb/v1/user/search-history?skip=0&limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -766,6 +766,16 @@
 								"v1",
 								"user",
 								"search-history"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
