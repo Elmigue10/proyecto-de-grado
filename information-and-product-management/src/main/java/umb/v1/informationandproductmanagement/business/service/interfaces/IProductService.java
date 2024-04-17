@@ -31,7 +31,7 @@ public interface IProductService {
 
     ResponseProductListDTO findByScreenSize(String screenSize, String categoryName, int skip, int limit);
 
-    ResponseProductListDTO findMostViewed();
+    ResponseProductListDTO findMostViewed(int skip, int limit);
 
     WebScraperResponseDTO webScraperBot(WebScraperRequestDTO webScraperRequest);
 

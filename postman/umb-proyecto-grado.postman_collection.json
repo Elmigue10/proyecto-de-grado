@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjQxODMzLCJleHAiOjE3MTMzMjgyMzN9.7B7qBSh3UsNUQ0aEiCSxmhkN4x31o_WO_1j4f-OYmXw",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMzc2NzYxLCJleHAiOjE3MTM0NjMxNjF9.EJ5BVtgzaZ-2GhQj6fknavBmMSmVUVwjSGrPshXTAig",
 									"type": "string"
 								}
 							]
@@ -25,7 +25,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/product?skip=10&limit=10",
+							"raw": "http://localhost:8080/umb/v1/product?skip=0&limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -39,7 +39,7 @@
 							"query": [
 								{
 									"key": "skip",
-									"value": "10"
+									"value": "0"
 								},
 								{
 									"key": "limit",
@@ -58,7 +58,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjQxODMzLCJleHAiOjE3MTMzMjgyMzN9.7B7qBSh3UsNUQ0aEiCSxmhkN4x31o_WO_1j4f-OYmXw",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMzc2NzYxLCJleHAiOjE3MTM0NjMxNjF9.EJ5BVtgzaZ-2GhQj6fknavBmMSmVUVwjSGrPshXTAig",
 									"type": "string"
 								}
 							]
@@ -636,7 +636,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVsQGVtYWlsLmNvbSIsInN1YiI6Im1pZ3VlbEBlbWFpbC5jb20iLCJpYXQiOjE3MTIxODAzMzksImV4cCI6MTcxMjI2NjczOX0.nBe9ng7GXtkUCsei-EjvSpxLHAAlFpEzkZbVE3EMEl4",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMzc2NzYxLCJleHAiOjE3MTM0NjMxNjF9.EJ5BVtgzaZ-2GhQj6fknavBmMSmVUVwjSGrPshXTAig",
 									"type": "string"
 								}
 							]
@@ -644,7 +644,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/product/find-most-viewed",
+							"raw": "http://localhost:8080/umb/v1/product/find-most-viewed?skip=0&limit=15",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -655,6 +655,16 @@
 								"v1",
 								"product",
 								"find-most-viewed"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "15"
+								}
 							]
 						}
 					},
@@ -769,7 +779,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMjQxODMzLCJleHAiOjE3MTMzMjgyMzN9.7B7qBSh3UsNUQ0aEiCSxmhkN4x31o_WO_1j4f-OYmXw",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJST0xFIjoiQ0xJRU5URSIsIkVNQUlMIjoibWlndWVkNzdAZ21haWwuY29tIiwic3ViIjoibWlndWVkNzdAZ21haWwuY29tIiwiaWF0IjoxNzEzMzc0MDUxLCJleHAiOjE3MTM0NjA0NTF9.TYwniFcqTINgFaQEoxh9xq-SG9E4Z1vinnC3ngfaKkU",
 									"type": "string"
 								}
 							]
@@ -777,10 +787,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/umb/v1/user/viewed-products?skip=0&limit=3",
+							"raw": "http://ec2-54-158-4-132.compute-1.amazonaws.com:8080/umb/v1/user/viewed-products?skip=0&limit=3",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"ec2-54-158-4-132",
+								"compute-1",
+								"amazonaws",
+								"com"
 							],
 							"port": "8080",
 							"path": [

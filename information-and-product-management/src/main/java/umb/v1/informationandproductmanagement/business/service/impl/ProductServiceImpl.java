@@ -19,6 +19,8 @@ import umb.v1.informationandproductmanagement.domain.repository.UserWithRoleRepo
 import umb.v1.informationandproductmanagement.domain.repository.ViewedProductRepository;
 
 import java.sql.Timestamp;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -144,18 +146,34 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ResponseProductListDTO findMostViewed() {
+    public ResponseProductListDTO findMostViewed(int skip, int limit) {
         List<ViewedProductEntity> viewedProducts = viewedProductRepository.findByViews();
 
         List<String> productIdList = viewedProducts.stream()
-                .map(ViewedProductEntity::getIdProductoMongodb)
-                .toList();
+                .map(ViewedProductEntity::getIdProductoMongodb).distinct().toList();
 
-        return productClient.findByIdList(RequestFindByIdListDTO.builder()
+        Map<String, Integer> indexId = new HashMap<>();
+        for (int i = 0; i < productIdList.size(); i++) {
+            indexId.put(productIdList.get(i), i);
+        }
+
+        ResponseProductListDTO responseProducts = productClient.findByIdList(RequestFindByIdListDTO.builder()
                 .idList(productIdList)
                 .skip(0)
                 .limit(productIdList.size())
                 .build());
+
+        List<ProductDTO> products = responseProducts.getProducts();
+        products.sort(Comparator.comparingInt(p -> indexId.getOrDefault(p.getId(), Integer.MAX_VALUE)));
+
+        int startIndex = Math.min(skip, products.size());
+        int endIndex = Math.min(startIndex + limit, products.size());
+
+        List<ProductDTO> paginateProducts = products.subList(startIndex, endIndex);
+
+        responseProducts.setProducts(paginateProducts);
+
+        return responseProducts;
     }
 
     @Override

@@ -210,10 +210,11 @@ public class ProductController {
     }
 
     @GetMapping("/find-most-viewed")
-    public ResponseEntity<ResponseProductListDTO> findMostViewed() {
+    public ResponseEntity<ResponseProductListDTO> findMostViewed(@RequestParam("skip") int skip,
+                                                                 @RequestParam("limit") int limit) {
         log.info("arrived request for find-most-viewed");
 
-        ResponseProductListDTO productsResponse = productService.findMostViewed();
+        ResponseProductListDTO productsResponse = productService.findMostViewed(skip, limit);
 
         log.info("find-most-viewed response: {}", productsResponse);
 
