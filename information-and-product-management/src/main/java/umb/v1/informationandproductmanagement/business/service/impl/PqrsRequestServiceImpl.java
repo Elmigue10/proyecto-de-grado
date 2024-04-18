@@ -183,11 +183,12 @@ public class PqrsRequestServiceImpl implements IPqrsRequestService {
 
             pqrsRequests.add(PqrsRequestDTO.builder()
                     .id(pqrsRequest.getId())
-                    .correoElectronico(user.getCorreoElectronico())
+                    .descripcionSolicitud(pqrsRequest.getDescripcionSolicitud())
                     .fechaRegistro(pqrsRequest.getFechaRegistro().toString())
                     .fechaActualiza(pqrsRequest.getFechaActualiza() == null ?
                             null :
                             pqrsRequest.getFechaActualiza().toString())
+                    .correoElectronico(user.getCorreoElectronico())
                     .incidencia(incidence.getTipoIncidencia())
                     .tipoSolicitud(pqrsRequestType.getTipoSolicitud())
                     .build());
