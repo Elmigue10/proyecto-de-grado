@@ -94,3 +94,7 @@ def find_by_id_list(product_find_id_list_request: ProductFindByIdListRequestMode
 @api_router.post("/umb/v1/product/reorganize")
 async def reorganize():
     return product_service.reorganize()
+
+@api_router.post("/umb/v1/product/refine-id")
+async def refine_id():
+    return product_service.refine_id()

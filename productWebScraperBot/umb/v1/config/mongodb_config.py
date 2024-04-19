@@ -266,3 +266,22 @@ def reorganize():
         'message': "OK",
         'status': 200
     }
+
+
+def refine_id():
+    products = collection.find()
+
+    for product in products:
+        if "/" in product["_id"]:
+            new_id = product["_id"].replace("/", "-")
+
+            new_document = {**product, "_id": new_id}
+
+            collection.delete_one({"_id": product["_id"]})
+
+            collection.insert_one(new_document)
+
+    return {
+        'message': "OK",
+        'status': 200
+    }

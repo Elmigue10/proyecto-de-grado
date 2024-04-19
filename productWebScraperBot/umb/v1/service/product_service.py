@@ -198,3 +198,7 @@ def find_by_id_list(product_find_id_list_request):
 
 def reorganize():
     return mongodb_config.reorganize()
+
+
+def refine_id():
+    return mongodb_config.refine_id()
