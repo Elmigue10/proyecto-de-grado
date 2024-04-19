@@ -183,7 +183,7 @@ public class ProductServiceImpl implements IProductService {
         try {
             webScraperResponse = productClient.webScraperBot(webScraperRequest);
         } catch (FeignException e) {
-            emailService.sendMail(ADMIN, PRODUCTS_WEB_SEARCH_RESULT, buildErrorWebScraperEmailContent());
+            emailService.sendMail(ADMIN_EMAIL, PRODUCTS_WEB_SEARCH_RESULT, buildErrorWebScraperEmailContent());
             return null;
         }
         String content = buildWebScraperEmailContent(webScraperRequest, webScraperResponse);
