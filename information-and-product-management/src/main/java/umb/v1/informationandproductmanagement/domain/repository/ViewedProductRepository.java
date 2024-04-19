@@ -16,4 +16,5 @@ public interface ViewedProductRepository extends JpaRepository<ViewedProductEnti
             "pv.id_producto_mongodb = views.id_producto_mongodb ORDER BY views_count DESC;", nativeQuery = true)
     List<ViewedProductEntity> findByViews();
 
+    int countByUsuarioId(Long id);
 }

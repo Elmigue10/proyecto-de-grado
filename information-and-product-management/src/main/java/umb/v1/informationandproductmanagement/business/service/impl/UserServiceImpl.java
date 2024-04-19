@@ -123,6 +123,7 @@ public class UserServiceImpl implements IUserService {
     public ResponseProductListDTO viewedProducts(Map<String, String> requestHeaders, int skip, int limit) {
         UserWithRoleEntity user = findUserByJwtTokenClaims(requestHeaders);
         List<ViewedProductEntity> viewedProducts = viewedProductRepository.findByUsuarioIdOrderByFechaDesc(user.getId());
+        int viewedProductsQuantity = viewedProductRepository.countByUsuarioId(user.getId());
 
         List<String> productIdList = viewedProducts.stream()
                 .map(ViewedProductEntity::getIdProductoMongodb).distinct().toList();
@@ -147,7 +148,7 @@ public class UserServiceImpl implements IUserService {
         List<ProductDTO> paginateProducts = products.subList(startIndex, endIndex);
 
         responseProducts.setProducts(paginateProducts);
-        responseProducts.setTotalProductos(paginateProducts.size());
+        responseProducts.setTotalProductos(viewedProductsQuantity);
 
         return responseProducts;
     }
