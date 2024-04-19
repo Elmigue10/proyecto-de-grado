@@ -35,4 +35,5 @@ public interface IProductService {
 
     WebScraperResponseDTO webScraperBot(WebScraperRequestDTO webScraperRequest);
 
+    ResponseProductListDTO refineProductsData();
 }

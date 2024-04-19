@@ -231,4 +231,15 @@ public class ProductController {
 
         return new ResponseEntity<>(webScraperResponse, HttpStatus.OK);
     }
+
+    @PostMapping("/refine-products-data")
+    public ResponseEntity<ResponseProductListDTO> refineProductsData() {
+        log.info("arrived request for refine-products-data");
+
+        ResponseProductListDTO refineProductsDataResponse = productService.refineProductsData();
+
+        log.info("web-scraper-bot response: {}", refineProductsDataResponse);
+
+        return new ResponseEntity<>(refineProductsDataResponse, HttpStatus.OK);
+    }
 }

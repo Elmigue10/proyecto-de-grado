@@ -83,4 +83,7 @@ public interface ProductClient {
 
     @PostMapping("/web-scraper-bot")
     WebScraperResponseDTO webScraperBot(@RequestBody WebScraperRequestDTO webScraperRequest);
+
+    @PostMapping("/refine-products-data")
+    ResponseProductListDTO refineProductsData();
 }

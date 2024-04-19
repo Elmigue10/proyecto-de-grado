@@ -193,6 +193,11 @@ public class ProductServiceImpl implements IProductService {
         return webScraperResponse;
     }
 
+    @Override
+    public ResponseProductListDTO refineProductsData() {
+        return productClient.refineProductsData();
+    }
+
     private UserWithRoleEntity findUserByJwtTokenClaims(Map<String, String> requestHeaders) {
         String authorizationHeader = requestHeaders.get(AUTHORIZATION_HEADER);
         String token = authorizationHeader.substring(6);
