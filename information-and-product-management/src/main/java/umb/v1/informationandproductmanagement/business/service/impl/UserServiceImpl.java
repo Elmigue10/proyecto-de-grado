@@ -85,6 +85,7 @@ public class UserServiceImpl implements IUserService {
         UserWithRoleEntity user = findUserByJwtTokenClaims(requestHeaders);
         List<SearchHistoryEntity> searches =
                 searchHistoryRepository.findByUsuarioIdOrderByFechaDesc(user.getId(), skip, limit);
+        long searchesQuantity = searchHistoryRepository.countByUsuarioIdOrderByFechaDesc(user.getId());
 
         List<SearchHistoryDTO> searchHistory = new ArrayList<>();
         searches.forEach(search -> {
@@ -114,6 +115,7 @@ public class UserServiceImpl implements IUserService {
                 .message(OK)
                 .status(200)
                 .searchHistory(searchHistory)
+                .total(searchesQuantity)
                 .build();
     }
 
@@ -145,6 +147,7 @@ public class UserServiceImpl implements IUserService {
         List<ProductDTO> paginateProducts = products.subList(startIndex, endIndex);
 
         responseProducts.setProducts(paginateProducts);
+        responseProducts.setTotalProductos(paginateProducts.size());
 
         return responseProducts;
     }

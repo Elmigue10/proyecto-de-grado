@@ -20,6 +20,9 @@ public class SearchHistoryResponseDTO {
     @JsonProperty("status")
     private int status;
 
+    @JsonProperty("total")
+    private long total;
+
     @JsonProperty("historialBusqueda")
     private List<SearchHistoryDTO> searchHistory;
 

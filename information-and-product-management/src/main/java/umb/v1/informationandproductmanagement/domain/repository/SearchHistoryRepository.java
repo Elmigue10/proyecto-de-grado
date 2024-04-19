@@ -12,4 +12,7 @@ public interface SearchHistoryRepository extends JpaRepository<SearchHistoryEnti
     @Query(value = "SELECT * FROM historial_busqueda hb where hb.usuario_id = :userId ORDER BY hb.fecha DESC OFFSET :skip LIMIT :limit", nativeQuery = true)
     List<SearchHistoryEntity> findByUsuarioIdOrderByFechaDesc(@Param("userId") Long userId, @Param("skip") int skip, @Param("limit") int limit);
 
+    @Query(value = "SELECT count(*) FROM historial_busqueda hb where hb.usuario_id = :userId", nativeQuery = true)
+    long countByUsuarioIdOrderByFechaDesc(@Param("userId") Long userId);
+
 }
