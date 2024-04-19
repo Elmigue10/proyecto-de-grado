@@ -268,16 +268,29 @@ def reorganize():
     }
 
 
-def refine_id():
+def refine_products_data():
     products = collection.find()
 
     for product in products:
-        if "/" in product["_id"]:
-            new_id = product["_id"].replace("/", "-")
+
+        product_id = product["_id"]
+
+        price_str = product.get("precio", "0")
+
+        price_int = int(price_str)
+
+        collection.update_one(
+            {"_id": product_id},
+            {"$set": {"precio": price_int}}
+        )
+
+        if "/" in product_id:
+            new_id = product_id.replace("/", "-")
+
+            collection.delete_one({"_id": product_id})
+            collection.delete_one({"_id": new_id})
 
             new_document = {**product, "_id": new_id}
-
-            collection.delete_one({"_id": product["_id"]})
 
             collection.insert_one(new_document)
 

@@ -26,10 +26,10 @@ def find_by_id(product_find_by_id_request):
         price = int(product.get('precio', 0))
         category = product.get('categoria')
 
-        min_price = str(price - price_difference)
-        max_price = str(price + price_difference)
+        min_price = price - price_difference
+        max_price = price + price_difference
 
-        similar = mongodb_config.find_by_price_range(min_price, max_price, category, 0, 10)
+        similar = mongodb_config.find_by_price_range(min_price, max_price, category, 0, 15)
 
         return {
             'message': "OK",
@@ -95,8 +95,8 @@ def find_by_name(product_find_by_name_request):
 
 
 def find_by_price_range(min_price, max_price, category_name, skip, limit):
-    results = mongodb_config.find_by_price_range(min_price.strip(),
-                                                 max_price.strip(),
+    results = mongodb_config.find_by_price_range(int(min_price.strip()),
+                                                 int(max_price.strip()),
                                                  category_name.strip(),
                                                  skip, limit)
     return {
@@ -200,5 +200,5 @@ def reorganize():
     return mongodb_config.reorganize()
 
 
-def refine_id():
-    return mongodb_config.refine_id()
+def refine_products_data():
+    return mongodb_config.refine_products_data()
