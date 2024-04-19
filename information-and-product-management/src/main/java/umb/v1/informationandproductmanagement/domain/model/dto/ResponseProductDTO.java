@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @ToString
 @Builder
@@ -21,10 +23,14 @@ public class ResponseProductDTO {
     @JsonProperty("producto")
     private ProductDTO product;
 
-    public ResponseProductDTO(String message, int status, ProductDTO product) {
+    @JsonProperty("similar")
+    private List<ProductDTO> similars;
+
+    public ResponseProductDTO(String message, int status, ProductDTO product, List<ProductDTO> similars) {
         this.message = message;
         this.status = status;
         this.product = product;
+        this.similars = similars;
     }
 
     public ResponseProductDTO() {
