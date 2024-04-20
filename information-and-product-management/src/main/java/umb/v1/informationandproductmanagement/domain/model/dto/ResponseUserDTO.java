@@ -19,10 +19,14 @@ public class ResponseUserDTO {
     @JsonProperty("user")
     private UserDTO user;
 
-    public ResponseUserDTO(String message, int status, UserDTO user) {
+    @JsonProperty("token")
+    private String token;
+
+    public ResponseUserDTO(String message, int status, UserDTO user, String token) {
         this.message = message;
         this.status = status;
         this.user = user;
+        this.token = token;
     }
 
     public ResponseUserDTO() {

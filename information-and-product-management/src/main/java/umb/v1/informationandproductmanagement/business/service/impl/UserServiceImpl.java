@@ -270,16 +270,26 @@ public class UserServiceImpl implements IUserService {
         if (optionalUserEntity.isPresent()) {
             UserEntity userEntity = optionalUserEntity.get();
 
-            userEntity.setNombreCompleto(user.getNombreCompleto());
-            userEntity.setCorreoElectronico(user.getCorreoElectronico());
+            if (!user.getNombreCompleto().equals(userEntity.getNombreCompleto())){
+                userEntity.setNombreCompleto(user.getNombreCompleto());
+            }
+
+            if (!user.getCorreoElectronico().equals(userEntity.getCorreoElectronico())){
+                userEntity.setCorreoElectronico(user.getCorreoElectronico());
+            }
+
             userEntity.setFechaActualiza(new Timestamp(System.currentTimeMillis()));
 
             userRepository.save(userEntity);
+
+            UserWithRoleEntity userWithRole = findUserByEmail(userEntity.getCorreoElectronico());
+            String token = jwtService.generateToken(userWithRole);
 
             return ResponseUserDTO.builder()
                     .message(OK)
                     .status(200)
                     .user(user)
+                    .token(token)
                     .build();
         } else {
             throw new ApiException("Usuario no encontrado", 404);
