@@ -182,7 +182,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     private static String buildContent(String token, PqrsRequestEntity pqrsRequest) {
-        String link = "http://localhost:3000/reset-password?token=" +
+        String link = "http://ec2-35-171-3-250.compute-1.amazonaws.com:3001/reset-password?token=" +
                 token +
                 "&pqrsId=" +
                 pqrsRequest.getId();
