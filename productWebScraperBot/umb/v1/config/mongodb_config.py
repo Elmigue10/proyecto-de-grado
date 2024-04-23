@@ -6,7 +6,7 @@ import pymongo
 ## DOCKER
 client = pymongo.MongoClient("mongodb://ComAdmin:C0m4dm1n@mongo/")
 ## LOCAL
-# client = pymongo.MongoClient("mongodb://ComAdmin:C0m4dm1n@ec2-54-158-4-132.compute-1.amazonaws.com:27017/")
+# client = pymongo.MongoClient("mongodb://locahost:27017/")
 database = client["web-scraper"]
 collection = database["products"]
 
