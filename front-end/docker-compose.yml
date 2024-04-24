@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  comparatech-fe:
+    image: truebu/comparatech-fe:latest
+    restart: on-failure
+    networks:
+      - umb
+    ports:
+      - 3001:3000
+networks:
+  umb:

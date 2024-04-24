@@ -1,0 +1,23 @@
+.filter-by {
+  border-radius: 20px;
+  height: max-content;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 992px) {
+  .filter-by {
+    width: 80%;
+  }
+  .card {
+    width: 80% !important;
+    margin: 0 !important;
+  }
+
+  .input {
+    width: 80% !important;
+  }
+}

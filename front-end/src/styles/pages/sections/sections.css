@@ -1,0 +1,56 @@
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  margin: 0 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.devices {
+  display: flex;
+}
+
+.devices-cards > .card {
+  height: max-content !important;
+}
+
+.devices-cards {
+  display: flex;
+  padding: 50px 100px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.form-check {
+  margin: 5px;
+}
+
+.form-check > input {
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 992px) {
+  .devices {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,17 @@
+.signup-form > input {
+  width: 200px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.signup .wrapper {
+  padding: 30px 10px;
+}
+
+@media screen and (max-width: 992px) {
+  .signup .wrapper {
+    width: max-content;
+    padding: 30px;
+  }
+}

@@ -1,0 +1,24 @@
+.post-title {
+  text-align: center;
+  font-weight: bold;
+  min-height: 40px;
+}
+
+.desc {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.cover-image {
+  align-items: center;
+}
+
+.home > .card > .link > .product-info {
+  max-height: 580px;
+}
+
+@media screen and (max-width: 992px) {
+  .card {
+    width: 100% !important;
+  }
+}

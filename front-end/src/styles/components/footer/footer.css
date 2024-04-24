@@ -1,0 +1,21 @@
+.footer {
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(2, 0, 128, 0.671);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+}
+
+.footer-link {
+  font-weight: 600;
+}
+
+.footer > p {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 15px 0 15px;
+}

@@ -1,0 +1,10 @@
+.custom-button {
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.custom-button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

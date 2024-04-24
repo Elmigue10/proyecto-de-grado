@@ -1,0 +1,74 @@
+.home {
+  display: flex;
+  padding: 50px 100px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.product-filter {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.product-filter > .cellphone-filter {
+  padding: 20px 30px;
+  cursor: pointer;
+  background-color: rgba(2, 0, 128, 0.671);
+  color: white;
+}
+
+.product-filter > .cellphone-filter:hover {
+  background-color: rgba(2, 0, 128, 0.596);
+  color: white;
+}
+
+.product-filter > .cellphone-filter:first-child {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  padding-left: 60px;
+}
+
+.product-filter > .cellphone-filter:last-child {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding-right: 60px;
+}
+
+.product-filter > .cellphone-filter {
+  padding: 20px 30px;
+  cursor: pointer;
+  background-color: rgba(2, 0, 128, 0.671);
+  color: white;
+}
+
+.product-filter > .cellphone-filter:hover {
+  background-color: rgba(2, 0, 128, 0.596);
+  color: white;
+}
+
+@media screen and (max-width: 992px) {
+
+  .home {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 100px;
+    flex-wrap: wrap;
+  }
+
+  .product-filter {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    align-items: center;
+  }
+
+  .cellphone-filter {
+    padding: 20px 30px !important;
+    width: 50%;
+    border-radius: 50px !important;
+    margin: 10px;
+    text-align: center;
+  }
+}
